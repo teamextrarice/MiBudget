@@ -184,7 +184,7 @@ public class AccountBalanceEqSoapHandler {
 
         } catch (Exception e) {
             Log.d("dump Request: " ,androidHttpTransport.requestDump);
-            Log.d("dump response: " ,androidHttpTransport.responseDump);
+//            Log.d("dump response: " ,androidHttpTransport.responseDump);
             e.printStackTrace();
         }
     }

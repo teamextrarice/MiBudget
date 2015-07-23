@@ -49,6 +49,10 @@ public class MainScreenActivity extends ActionBarActivity
     public static final String PREFS_NAME = "LoginPrefFile";
     private static final String PREF_USERNAME = "username";
     private static final String PREF_PASSWORD = "password";
+    private HashMap<String,String> accBasicDetMap;
+    private HashMap<String,String> accBalanceDetMap;
+    private boolean taskFinished;
+
 
     /*
      * Used to store the last screen title. For use in {@link #restoreActionBar()}.
@@ -133,6 +137,7 @@ public class MainScreenActivity extends ActionBarActivity
         AsyncCallWS task = new AsyncCallWS();
         //Call execute
         task.execute();
+
 
     }
 
@@ -236,15 +241,10 @@ public class MainScreenActivity extends ActionBarActivity
             //getAcctDetails(celcius);
             AccountBalanceEqSoapHandler handler = new AccountBalanceEqSoapHandler("0000450044003");
             handler.getAcctDetails();
-            HashMap<String,String> accBasicDetMap = handler.getAcctBasicDetailMap();
-            HashMap<String,String> accBalanceDetMap = handler.getAcctBalanceDetailMap();
+            accBasicDetMap = handler.getAcctBasicDetailMap();
+            accBalanceDetMap = handler.getAcctBalanceDetailMap();
 
-            String acctref = accBasicDetMap.get("acctref");
-            String custName = accBasicDetMap.get("custname");
-            String ledgerbalance = accBalanceDetMap.get("ledgerbalance");
 
-            TextView sample = (TextView)findViewById(R.id.sample_text);
-            sample.setText("acctref: " + acctref + "\n" + "custname: " +custName + "\n" + "ledgerbalance: " + ledgerbalance);
 
             return null;
         }
@@ -252,7 +252,17 @@ public class MainScreenActivity extends ActionBarActivity
         @Override
         protected void onPostExecute(Void result) {
 //            Log.i(TAG, "onPostExecute");
-//            tv.setText(fahren + "° F");
+//            tv.setText(fahren + "ï¿½ F");
+
+
+            String acctref = accBasicDetMap.get("acctref");
+            String custName = accBasicDetMap.get("custname");
+            String ledgerbalance = accBalanceDetMap.get("ledgerbalance");
+            String availbalance = accBalanceDetMap.get("availbalance");
+            TextView sample = (TextView) findViewById(R.id.sample_text);
+            sample.setText("acctref: " + acctref + "\n" + "custname: " + custName + "\n" + "ledgerbalance: " + ledgerbalance
+            + "\n" + "avail balance: " + availbalance);
+
         }
 
         @Override
