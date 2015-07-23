@@ -27,7 +27,8 @@ import com.misys.teamextrarice.mibudget.fragments.UserDetailsFragment;
 
 
 public class MainScreenActivity extends ActionBarActivity
-        implements NavigationDrawerFragment.NavigationDrawerCallbacks {
+        implements NavigationDrawerFragment.NavigationDrawerCallbacks,
+                    UserDetailsFragment.OnFragmentInteractionListener {
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
      */
@@ -169,6 +170,11 @@ public class MainScreenActivity extends ActionBarActivity
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public void onFragmentInteraction(Uri uri) {
+
+    }
+
     /**
      * A placeholder fragment containing a simple view.
      */
@@ -208,10 +214,7 @@ public class MainScreenActivity extends ActionBarActivity
                     getArguments().getInt(ARG_SECTION_NUMBER));
         }
 
-        @Override
-        public void onFragmentInteraction(Uri uri) {
-            
-        }
+
     }
 
 }
