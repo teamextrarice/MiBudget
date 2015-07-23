@@ -4,13 +4,11 @@
     android:layout_width="match_parent" android:layout_height="match_parent"
     tools:context=".MainScreenActivity">
 
-    <FrameLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/home_layout">
-
-
-    </FrameLayout>
+    <fragment android:id="@+id/fragment_home"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:name="com.misys.teamextrarice.mibudget.fragments.HomeFragment"
+        tools:layout="@layout/fragment_home" />
 
     <!-- android:layout_gravity="start" tells DrawerLayout to treat
          this as a sliding drawer on the left side for left-to-right
