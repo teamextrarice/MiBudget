@@ -1,6 +1,7 @@
 package com.misys.teamextrarice.mibudget.activities;
 
 import android.app.Activity;
+import android.net.Uri;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
@@ -205,6 +206,11 @@ public class MainScreenActivity extends ActionBarActivity
             super.onAttach(activity);
             ((MainScreenActivity) activity).onSectionAttached(
                     getArguments().getInt(ARG_SECTION_NUMBER));
+        }
+
+        @Override
+        public void onFragmentInteraction(Uri uri) {
+            
         }
     }
 
