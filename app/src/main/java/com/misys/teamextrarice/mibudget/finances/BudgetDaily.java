@@ -1,4 +1,4 @@
-package com.misys.teamextrarice.mibudget.com.misys.teamextrarice.finances;
+package com.misys.teamextrarice.mibudget.finances;
 
 /**
  * Created by Edgar on 7/23/2015.

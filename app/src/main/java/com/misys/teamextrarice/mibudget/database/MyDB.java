@@ -96,9 +96,8 @@ public class MyDB{
     public final static String SVG_AMOUNT="amount"; // savings amount
     public final static String SVG_COMMENTS="comments";  // comments for the entry
 
-    public long addSavings(String id, String partyId,String date, String amount, String comments){
+    public long addSavings(String partyId,String date, String amount, String comments){
         ContentValues values = new ContentValues();
-        values.put(SVG_ID, id);
         values.put(SVG_PTY_ID, partyId);
         values.put(SVG_DATE, date);
         values.put(SVG_AMOUNT, amount);
@@ -121,7 +120,7 @@ public class MyDB{
     }
     public Cursor selectAllSavings() {
         String[] cols = new String[] {SVG_ID, SVG_PTY_ID, SVG_DATE, SVG_AMOUNT, SVG_COMMENTS};
-        Cursor mCursor = database.query(true, SVG_TABLE,cols,null
+        Cursor mCursor = database.query(false, SVG_TABLE,cols,null
                 , null, null, null, null, null);
         if (mCursor != null) {
             mCursor.moveToFirst();
@@ -138,9 +137,8 @@ public class MyDB{
     public final static String INCEXP_AMOUNT="amount"; // INC/EXP amount
     public final static String INCEXP_COMMENTS="comments";  // Comments for the transaction
 
-    public long addIncome(String id, String partyId,String type,String effectiveDay, String amount, String comments){
+    public long addIncome(String partyId,String effectiveDay, String amount, String comments){
         ContentValues values = new ContentValues();
-        values.put(INCEXP_ID, id);
         values.put(INCEXP_PTY_ID, partyId);
         values.put(INCEXP_TYPE, "INCOME");
         values.put(INCEXP_DATE, effectiveDay);
@@ -148,9 +146,8 @@ public class MyDB{
         values.put(INCEXP_COMMENTS, comments);
         return database.insert(INCEXP_TABLE, null, values);
     }
-    public long addExpense(String id, String partyId,String type,String effectiveDay, String amount, String comments){
+    public long addExpense(String partyId,String effectiveDay, String amount, String comments){
         ContentValues values = new ContentValues();
-        values.put(INCEXP_ID, id);
         values.put(INCEXP_PTY_ID, partyId);
         values.put(INCEXP_TYPE, "EXPENSE");
         values.put(INCEXP_DATE, effectiveDay);
@@ -203,9 +200,8 @@ public class MyDB{
     public final static String BGT_AMOUNT="amount"; // account number of user
     public final static String BGT_COMMENTS="comments";  // cutoff date of user
 
-    public long addBudget(String id, String partyId,String type,String date, String amount, String comments){
+    public long addBudget(String partyId,String type,String date, String amount, String comments){
         ContentValues values = new ContentValues();
-        values.put(BGT_ID, id);
         values.put(BGT_PTY_ID, partyId);
         values.put(BGT_TYPE, type);
         values.put(BGT_DATE, date);

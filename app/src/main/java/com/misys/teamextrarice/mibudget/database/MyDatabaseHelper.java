@@ -18,11 +18,14 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
     private static final String DATABASE_CREATE_USERS = "CREATE TABLE Parties ( _id INTEGER PRIMARY KEY AUTOINCREMENT,name TEXT NOT NULL UNIQUE" +
             ",password TEXT ,acctNo INTEGER, cutoffDay INTEGER, birthDate DATE, job TEXT);";
     private static final String DATABASE_CREATE_SAVINGS = "CREATE TABLE Savings ( txn_SAVINGS_id INTEGER PRIMARY KEY AUTOINCREMENT" +
-            ",partyId FOREIGN KEY REFERENCES Parties(_id), txn_date DATE, amount INTEGER, comments TEXT);";
+            ",partyId INTEGER, txn_date DATE, amount INTEGER, comments TEXT" +
+            ",FOREIGN KEY(partyId) REFERENCES Parties(_id));";
     private static final String DATABASE_CREATE_BUDGET = "CREATE TABLE Budget ( txn_BUDGET_id INTEGER PRIMARY KEY AUTOINCREMENT" +
-            ",partyId FOREIGN KEY REFERENCES Parties(_id), type TEXT NOT NULL, txn_date DATE, amount INTEGER, comments TEXT);";
+            ",partyId INTEGER, type TEXT NOT NULL, txn_date DATE, amount INTEGER, comments TEXT" +
+            ",FOREIGN KEY(partyId) REFERENCES Parties(_id));";
     private static final String DATABASE_CREATE_INCEXP = "CREATE TABLE IncExp ( txn_INCEXP_id INTEGER PRIMARY KEY AUTOINCREMENT" +
-            ",partyId FOREIGN KEY REFERENCES Parties(_id), type TEXT NOT NULL, effectiveDay DATE, amount INTEGER, comments TEXT);";
+            ",partyId INTEGER, type TEXT NOT NULL, effectiveDay DATE, amount INTEGER, comments TEXT" +
+            ",FOREIGN KEY(partyId) REFERENCES Parties(_id));";
 
     public MyDatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -32,8 +35,9 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase database) {
         database.execSQL(DATABASE_CREATE_USERS);
-        //database.execSQL(DATABASE_CREATE_SAVINGS);
-        //database.execSQL(DATABASE_CREATE_BUDGET);
+        database.execSQL(DATABASE_CREATE_SAVINGS);
+        database.execSQL(DATABASE_CREATE_BUDGET);
+        database.execSQL(DATABASE_CREATE_INCEXP);
     }
 
     // Method is called during an upgrade of the database,
@@ -43,8 +47,9 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
                 "Upgrading database from version " + oldVersion + " to "
                         + newVersion + ", which will destroy all old data");
         database.execSQL("DROP TABLE IF EXISTS Parties");
-        //database.execSQL("DROP TABLE IF EXISTS Savings");
-        //database.execSQL("DROP TABLE IF EXISTS Budget");
+        database.execSQL("DROP TABLE IF EXISTS Savings");
+        database.execSQL("DROP TABLE IF EXISTS Budget");
+        database.execSQL("DROP TABLE IF EXISTS IncExp");
         onCreate(database);
     }
 }
