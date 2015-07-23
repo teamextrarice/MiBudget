@@ -71,7 +71,7 @@
             android:layout_height="wrap_content"
             android:text="Sign Up"
             android:paddingLeft="5dp"
-            />
+            android:onClick="callRegisterScreen"/>
 
     </LinearLayout>
     <TextView
