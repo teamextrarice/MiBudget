@@ -16,9 +16,9 @@ public class RegisterActivity extends ActionBarActivity {
     private EditText name;
     private EditText password;
     private EditText acctnum;
-    private Date cutOffDate;
-    private Date birthDate;
-    private String job;
+    private EditText cutOffDate;
+    private EditText birthDate;
+    private EditText job;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,12 +28,12 @@ public class RegisterActivity extends ActionBarActivity {
     }
 
     private void setupGUI(){
-//        name = (EditText)findViewById(R.id.name_input);
-//        password = (EditText)findViewById(R.id.pw_input);
-//        acctnum = (EditText)findViewById(R.id.acctnum_input);
-//        cutOffDate = (EditText)findViewById(R.id.cutoffdate_input);
-//        birthDate = (EditText)findViewById(R.id.birthdate_input);
-//        job = (EditText)findViewById(R.id.job_input);
+        name = (EditText)findViewById(R.id.name_input);
+        password = (EditText)findViewById(R.id.pw_input);
+        acctnum = (EditText)findViewById(R.id.acctnum_input);
+        cutOffDate = (EditText)findViewById(R.id.cutoffdate_input);
+        birthDate = (EditText)findViewById(R.id.birthdate_input);
+        job = (EditText)findViewById(R.id.job_input);
     }
 
     public void createRecord(){

@@ -5,12 +5,12 @@
     android:background="@drawable/extrarice"
     android:paddingTop="120dp">
     <LinearLayout
-        android:layout_width="100dp"
-        android:layout_height="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_gravity="center_horizontal">
         <TextView
-            android:layout_width="50dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/name_label"
             android:text="Name:"
@@ -18,16 +18,17 @@
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:id="@+id/name_input"
             android:hint="Input Name"/>
 
     </LinearLayout>
     <LinearLayout
-        android:layout_width="100dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_gravity="center_horizontal|bottom">
+        android:layout_gravity="center_horizontal">
         <TextView
-            android:layout_width="50dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/password_label"
             android:text="Password:"
@@ -36,16 +37,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:hint="Input Password"
+            android:id="@+id/pw_input"
             android:inputType="textPassword"/>
 
     </LinearLayout>
     <LinearLayout
-        android:layout_width="100dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_gravity="center_horizontal">
         <TextView
-            android:layout_width="50dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/acctnum_label"
             android:text="Account:"
@@ -54,16 +56,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:hint="Input Account"
+            android:id="@+id/acctnum_input"
             />
 
     </LinearLayout>
     <LinearLayout
-        android:layout_width="100dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_gravity="center_horizontal">
         <TextView
-            android:layout_width="50dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/cutoffdate_label"
             android:text="Cut Off Date:"
@@ -73,16 +76,17 @@
             android:layout_height="wrap_content"
             android:hint="Input Cut Off Date"
             android:inputType="date"
+            android:id="@+id/cutoffdate_input"
             />
 
     </LinearLayout>
     <LinearLayout
-        android:layout_width="100dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_gravity="center_horizontal">
         <TextView
-            android:layout_width="40dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/birthdate_label"
             android:text="Birthdate:"
@@ -92,16 +96,18 @@
             android:layout_height="wrap_content"
             android:hint="Input Birthdate"
             android:inputType="date"
+            android:id="@+id/birthdate_input"
+
             />
 
     </LinearLayout>
     <LinearLayout
-        android:layout_width="100dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_gravity="center_horizontal">
         <TextView
-            android:layout_width="40dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/job_label"
             android:text="Account:"
@@ -110,6 +116,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:hint="Input Job"
+            android:id="@+id/job_input"
             />
 
     </LinearLayout>
