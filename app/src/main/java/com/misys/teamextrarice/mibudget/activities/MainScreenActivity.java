@@ -64,7 +64,13 @@ public class MainScreenActivity extends ActionBarActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main_screen);
+
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction()
+                .add(R.id.drawer_layout, HomeFragment.newInstance())
+                .commit();
 
         mNavigationDrawerFragment = (NavigationDrawerFragment)
                 getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);
@@ -127,10 +133,6 @@ public class MainScreenActivity extends ActionBarActivity
 
         PieChart chart = (PieChart) findViewById(R.id.chart);
 
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction()
-                .add(R.id.drawer_layout, HomeFragment.newInstance())
-                .commit();
 
         chart.setData(data);
         chart.setCenterText("DAN IS THE MAN."); //change to budget
