@@ -187,18 +187,30 @@ public class MainScreenActivity extends ActionBarActivity
                 // Single menu item is selected do something
                 // Ex: launching new activity/screen or show alert message
                 Toast.makeText(MainScreenActivity.this, "Add Daily Transactions is Selected", Toast.LENGTH_SHORT).show();
+                Intent dailyInt = new Intent(getApplicationContext(),AddDailyTransactionActivity.class);
+                dailyInt.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                getApplicationContext().startActivity(dailyInt);
                 return true;
 
             case R.id.menu_add_income_expense:
                 Toast.makeText(MainScreenActivity.this, "Add Income/Expense is Selected", Toast.LENGTH_SHORT).show();
+                Intent incexpInt = new Intent(getApplicationContext(),AddIncomeExpenseActivity.class);
+                incexpInt.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                getApplicationContext().startActivity(incexpInt);
                 return true;
 
             case R.id.menu_savings:
                 Toast.makeText(MainScreenActivity.this, "Add Savings is Selected", Toast.LENGTH_SHORT).show();
+                Intent savInt = new Intent(getApplicationContext(),AddSavingsActivity.class);
+                savInt.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                getApplicationContext().startActivity(savInt);
                 return true;
 
             case R.id.menu_upd_savings:
                 Toast.makeText(MainScreenActivity.this, "Update Savings is Selected", Toast.LENGTH_SHORT).show();
+                Intent upsavInt = new Intent(getApplicationContext(),UpdateSavingsActivity.class);
+                upsavInt.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                getApplicationContext().startActivity(upsavInt);
                 return true;
 
             default:

@@ -31,6 +31,26 @@
             android:label="@string/app_name" >
 
         </activity>
+        <activity
+            android:name=".activities.AddDailyTransactionActivity"
+            android:label="@string/app_name" >
+
+        </activity>
+        <activity
+            android:name=".activities.AddIncomeExpenseActivity"
+            android:label="@string/app_name" >
+
+        </activity>
+        <activity
+            android:name=".activities.AddSavingsActivity"
+            android:label="@string/app_name" >
+
+        </activity>
+        <activity
+            android:name=".activities.UpdateSavingsActivity"
+            android:label="@string/app_name" >
+
+        </activity>
     </application>
 
 </manifest>
