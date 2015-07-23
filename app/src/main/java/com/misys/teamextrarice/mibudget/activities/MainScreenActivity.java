@@ -2,6 +2,7 @@ package com.misys.teamextrarice.mibudget.activities;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
@@ -34,6 +35,10 @@ public class MainScreenActivity extends ActionBarActivity
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
      */
     private NavigationDrawerFragment mNavigationDrawerFragment;
+
+    public static final String PREFS_NAME = "LoginPrefFile";
+    private static final String PREF_USERNAME = "username";
+    private static final String PREF_PASSWORD = "password";
 
     /*
      * Used to store the last screen title. For use in {@link #restoreActionBar()}.
@@ -127,6 +132,15 @@ public class MainScreenActivity extends ActionBarActivity
             case 2:
                 break;
             case 3:
+                SharedPreferences pref = getSharedPreferences(PREFS_NAME,MODE_PRIVATE);
+                SharedPreferences.Editor editor = pref.edit();
+                editor.putString(PREF_USERNAME,null);
+                editor.putString(PREF_PASSWORD,null);
+                editor.commit();
+
+                Intent loginIntent = new Intent(getApplicationContext(),LoginActivity.class);
+                loginIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                getApplicationContext().startActivity(loginIntent);
                 break;
             default:
                 break;
