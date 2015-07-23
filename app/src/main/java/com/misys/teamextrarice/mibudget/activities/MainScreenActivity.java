@@ -25,6 +25,7 @@ import java.util.HashMap;
 import com.github.mikephil.charting.components.YAxis.AxisDependency;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieData;
+import com.misys.teamextrarice.mibudget.fragments.BalanceDetailsFragment;
 import com.misys.teamextrarice.mibudget.fragments.HomeFragment;
 import com.misys.teamextrarice.mibudget.fragments.NavigationDrawerFragment;
 import com.misys.teamextrarice.mibudget.R;
@@ -40,7 +41,8 @@ import org.w3c.dom.Text;
 public class MainScreenActivity extends ActionBarActivity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks,
                     UserDetailsFragment.OnFragmentInteractionListener,
-                    HomeFragment.OnFragmentInteractionListener {
+                    HomeFragment.OnFragmentInteractionListener,
+                    BalanceDetailsFragment.OnFragmentInteractionListener{
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
      */
@@ -157,7 +159,9 @@ public class MainScreenActivity extends ActionBarActivity
                     .replace(R.id.container, UserDetailsFragment.newInstance())
                     .commit();
                      break;
-            case 2:
+            case 2:  fragmentManager.beginTransaction()
+                    .replace(R.id.container, BalanceDetailsFragment.newInstance())
+                    .commit();
                 break;
             case 3:
                 SharedPreferences pref = getSharedPreferences(PREFS_NAME,MODE_PRIVATE);
