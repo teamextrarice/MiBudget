@@ -17,6 +17,7 @@ public class SelectMainActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        System.out.print("Loading SelectMainActivity");
         selectMain();
     }
 
