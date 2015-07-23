@@ -12,9 +12,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.support.v4.widget.DrawerLayout;
+import java.util.ArrayList;
 
 import com.misys.teamextrarice.mibudget.fragments.NavigationDrawerFragment;
 import com.misys.teamextrarice.mibudget.R;
+import com.github.mikephil.charting.charts.PieChart;
+import com.github.mikephil.charting.data.Entry;
 
 
 public class MainScreenActivity extends ActionBarActivity
@@ -25,7 +28,7 @@ public class MainScreenActivity extends ActionBarActivity
      */
     private NavigationDrawerFragment mNavigationDrawerFragment;
 
-    /**
+    /*
      * Used to store the last screen title. For use in {@link #restoreActionBar()}.
      */
     private CharSequence mTitle;
@@ -35,7 +38,7 @@ public class MainScreenActivity extends ActionBarActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_screen);
 
-        mNavigationDrawerFragment = (NavigationDrawerFragment)
+        mNavigationDrawerFagment = (NavigationDrawerFragment)
                 getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);
         mTitle = getTitle();
 
@@ -43,6 +46,22 @@ public class MainScreenActivity extends ActionBarActivity
         mNavigationDrawerFragment.setUp(
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
+
+        ArrayList<Entry> values1 = new ArrayList<Entry>();
+        ArrayList<Entry> values2 = new ArrayList<Entry>();
+
+        Entry c1e1 = new Entry(100.000f, 0); // 0 == quarter 1
+        values1.add(c1e1);
+        Entry c1e2 = new Entry(50.000f, 1); // 1 == quarter 2 ...
+        values1.add(c1e2);
+        // and so on ...
+
+        Entry c2e1 = new Entry(120.000f, 0); // 0 == quarter 1
+        values2.add(c2e1);
+        Entry c2e2 = new Entry(110.000f, 1); // 1 == quarter 2 ...
+        values2.add(c2e2);
+
+        PieChart chart = (PieChart) findViewById(R.id.chart);
     }
 
     @Override
