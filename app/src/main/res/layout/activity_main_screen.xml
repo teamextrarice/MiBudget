@@ -4,7 +4,7 @@
     android:layout_width="match_parent" android:layout_height="match_parent"
     tools:context=".MainScreenActivity">
 
-    <fragment android:id="@+id/navigation_drawer"
+    <fragment android:id="@+id/fragment_home"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:name="com.misys.teamextrarice.mibudget.fragments.HomeFragment"

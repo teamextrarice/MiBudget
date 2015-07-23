@@ -64,7 +64,7 @@ public class MainScreenActivity extends ActionBarActivity
 
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction()
-                .replace(R.id.container, UserDetailsFragment.newInstance())
+                .replace(R.id.container, HomeFragment.newInstance())
                 .commit();
 
 
