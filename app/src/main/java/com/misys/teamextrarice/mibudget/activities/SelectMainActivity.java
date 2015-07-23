@@ -26,10 +26,14 @@ public class SelectMainActivity extends ActionBarActivity {
         String password = pref.getString(PREF_PASSWORD, null);
 
         if (username == null || password == null) {
-            getApplicationContext().startActivity(new Intent(getApplicationContext(),LoginActivity.class));
+            Intent loginIntent = new Intent(getApplicationContext(),LoginActivity.class);
+            loginIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            getApplicationContext().startActivity(loginIntent);
         }
         else{
-            getApplicationContext().startActivity(new Intent(getApplicationContext(),MainScreenActivity.class));
+            Intent mainScreenIntent = new Intent(getApplicationContext(),MainScreenActivity.class);
+            mainScreenIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            getApplicationContext().startActivity(mainScreenIntent);
         }
     }
 
