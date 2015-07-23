@@ -136,6 +136,7 @@ public class MainScreenActivity extends ActionBarActivity
                 editor.commit();
 
                 Intent loginIntent = new Intent(getApplicationContext(),LoginActivity.class);
+                loginIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 loginIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 getApplicationContext().startActivity(loginIntent);
                 break;
