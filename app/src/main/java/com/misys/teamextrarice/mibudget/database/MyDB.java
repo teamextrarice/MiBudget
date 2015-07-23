@@ -10,18 +10,21 @@ import android.database.sqlite.SQLiteDatabase;
  */
 public class MyDB{
 
+    //create an object of SingleObject
+    private static MyDB instance = new MyDB();
+    private MyDB(){
+    }
+    public static MyDB getInstance(){
+        return instance;
+    }
     private MyDatabaseHelper dbHelper;
-
     private SQLiteDatabase database;
 
-    /**
-     *
-     * @param context
-     */
-    public MyDB(Context context){
+    public void setdbHelper(Context context) {
         dbHelper = new MyDatabaseHelper(context);
         database = dbHelper.getWritableDatabase();
     }
+
     public final static String PTY_TABLE="Parties"; // name of table
 
     public final static String PTY_ID="_id"; // id value for user
