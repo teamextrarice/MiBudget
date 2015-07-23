@@ -127,6 +127,11 @@ public class MainScreenActivity extends ActionBarActivity
 
         PieChart chart = (PieChart) findViewById(R.id.chart);
 
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction()
+                .add(R.id.drawer_layout, HomeFragment.newInstance())
+                .commit();
+
         chart.setData(data);
         chart.setCenterText("DAN IS THE MAN."); //change to budget
         chart.invalidate();
@@ -135,10 +140,7 @@ public class MainScreenActivity extends ActionBarActivity
         //Call execute
         task.execute();
 
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction()
-                .add(R.id.drawer_layout, HomeFragment.newInstance())
-                .commit();
+
 
 
     }
