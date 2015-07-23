@@ -1,4 +1,4 @@
-package com.misys.teamextrarice.mibudget.com.misys.teamextrarice.finances;
+package com.misys.teamextrarice.mibudget.finances;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
