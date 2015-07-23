@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -26,13 +27,14 @@ public class LoginActivity extends ActionBarActivity {
         setContentView(R.layout.activity_login_screen);
     }
 
-    private void login(){
+    private void login(View view){
         userInput = (EditText)findViewById(R.id.user_input);
         passwordInput = (EditText)findViewById(R.id.password_input);
         String username ="";
         String password ="";
 
         MyDB db = MyDB.getInstance();
+        db.setdbHelper(this);
         //validate user
         Cursor cur = db.selectByName(userInput.getText().toString());
         if(cur != null) {
