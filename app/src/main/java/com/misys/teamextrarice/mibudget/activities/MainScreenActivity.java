@@ -22,11 +22,11 @@ import com.misys.teamextrarice.mibudget.R;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.utils.ColorTemplate;
+import com.misys.teamextrarice.mibudget.fragments.UserDetailsFragment;
 
 
 public class MainScreenActivity extends ActionBarActivity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks {
-
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
      */
@@ -109,9 +109,13 @@ public class MainScreenActivity extends ActionBarActivity
     public void onNavigationDrawerItemSelected(int position) {
         // update the main content by replacing fragments
         FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction()
-                .replace(R.id.container, PlaceholderFragment.newInstance(position + 1))
-                .commit();
+
+        if (position == 0) {
+            fragmentManager.beginTransaction()
+                    .replace(R.id.container, UserDetailsFragment.newInstance())
+                    .commit();
+        }
+
     }
 
     public void onSectionAttached(int number) {
