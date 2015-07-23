@@ -69,7 +69,7 @@ public class MainScreenActivity extends ActionBarActivity
 
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction()
-                .add(R.id.drawer_layout, HomeFragment.newInstance())
+                .add(R.id.home_layout, HomeFragment.newInstance())
                 .commit();
 
         mNavigationDrawerFragment = (NavigationDrawerFragment)
