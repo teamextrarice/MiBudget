@@ -131,11 +131,6 @@ public class MainScreenActivity extends ActionBarActivity
         chart.setCenterText("DAN IS THE MAN."); //change to budget
         chart.invalidate();
 
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction()
-                .replace(R.id.container, HomeFragment.newInstance())
-                .commit();
-
         AsyncCallWS task = new AsyncCallWS();
         //Call execute
         task.execute();
