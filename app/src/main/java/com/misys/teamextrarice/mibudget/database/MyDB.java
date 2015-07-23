@@ -34,9 +34,8 @@ public class MyDB{
 
 
 
-    public long createRecord(String id, String name,String password, String acctid, String cutoffDay, String birthDate, String job){
+    public long createRecord(String name,String password, String acctid, String cutoffDay, String birthDate, String job){
         ContentValues values = new ContentValues();
-        values.put(PTY_ID, id);
         values.put(PTY_NAME, name);
         values.put(PTY_PWD, password);
         values.put(PTY_ACCTID, acctid);
@@ -78,11 +77,11 @@ public class MyDB{
 
     public final static String SVG_TABLE="Savings"; // name of table
 
-    public final static String SVG_ID="txn_SAVINGS_id"; // id value for user
-    public final static String SVG_PTY_ID="partyId";  // name of user
-    public final static String SVG_DATE="txn_date";  // pass of user
-    public final static String SVG_AMOUNT="amount"; // account number of user
-    public final static String SVG_COMMENTS="comments";  // cutoff date of user
+    public final static String SVG_ID="txn_SAVINGS_id"; // id value for savings
+    public final static String SVG_PTY_ID="partyId";  // id of user
+    public final static String SVG_DATE="txn_date";  // date of transaction
+    public final static String SVG_AMOUNT="amount"; // savings amount
+    public final static String SVG_COMMENTS="comments";  // comments for the entry
 
     public long addSavings(String id, String partyId,String date, String amount, String comments){
         ContentValues values = new ContentValues();
@@ -117,11 +116,76 @@ public class MyDB{
         return mCursor; // iterate to get each value.
     }
 
+    public final static String INCEXP_TABLE="IncExp"; // name of table
+
+    public final static String INCEXP_ID="txn_INCEXP_id"; // id auto-incremented for INC.EXP
+    public final static String INCEXP_PTY_ID="partyId";  // id of user
+    public final static String INCEXP_TYPE="type";  // type - INCOME or EXPENSE
+    public final static String INCEXP_DATE="effectiveDay";  // day of the month takes effect
+    public final static String INCEXP_AMOUNT="amount"; // INC/EXP amount
+    public final static String INCEXP_COMMENTS="comments";  // Comments for the transaction
+
+    public long addIncome(String id, String partyId,String type,String effectiveDay, String amount, String comments){
+        ContentValues values = new ContentValues();
+        values.put(INCEXP_ID, id);
+        values.put(INCEXP_PTY_ID, partyId);
+        values.put(INCEXP_TYPE, "INCOME");
+        values.put(INCEXP_DATE, effectiveDay);
+        values.put(INCEXP_AMOUNT, amount);
+        values.put(INCEXP_COMMENTS, comments);
+        return database.insert(INCEXP_TABLE, null, values);
+    }
+    public long addExpense(String id, String partyId,String type,String effectiveDay, String amount, String comments){
+        ContentValues values = new ContentValues();
+        values.put(INCEXP_ID, id);
+        values.put(INCEXP_PTY_ID, partyId);
+        values.put(INCEXP_TYPE, "EXPENSE");
+        values.put(INCEXP_DATE, effectiveDay);
+        values.put(INCEXP_AMOUNT, amount);
+        values.put(INCEXP_COMMENTS, comments);
+        return database.insert(INCEXP_TABLE, null, values);
+    }
+
+    public long updateIncome(String id, String partyId,String type,String effectiveDay, String amount, String comments){
+        ContentValues values = new ContentValues();
+        values.put(INCEXP_ID, id);
+        values.put(INCEXP_PTY_ID, partyId);
+        values.put(INCEXP_TYPE, "INCOME");
+        values.put(INCEXP_DATE, effectiveDay);
+        values.put(INCEXP_AMOUNT, amount);
+        values.put(INCEXP_COMMENTS, comments);
+        return database.update(INCEXP_TABLE, values, INCEXP_ID + " = " + id, null);
+    }
+
+    public long updateExpense(String id, String partyId,String type,String effectiveDay, String amount, String comments){
+        ContentValues values = new ContentValues();
+        values.put(INCEXP_ID, id);
+        values.put(INCEXP_PTY_ID, partyId);
+        values.put(INCEXP_TYPE, "INCOME");
+        values.put(INCEXP_DATE, effectiveDay);
+        values.put(INCEXP_AMOUNT, amount);
+        values.put(INCEXP_COMMENTS, comments);
+        return database.update(INCEXP_TABLE, values, INCEXP_ID + " = " + id, null);
+    }
+
+    public long deleteIncomeExpense(String id){
+        return database.delete(INCEXP_TABLE, INCEXP_ID + " = " + id, null);
+    }
+    public Cursor selectAllIncomeExpense() {
+        String[] cols = new String[] {INCEXP_ID, INCEXP_PTY_ID, INCEXP_TYPE, INCEXP_DATE, INCEXP_AMOUNT, INCEXP_COMMENTS};
+        Cursor mCursor = database.query(true, INCEXP_TABLE,cols,null
+                , null, null, null, null, null);
+        if (mCursor != null) {
+            mCursor.moveToFirst();
+        }
+        return mCursor; // iterate to get each value.
+    }
+
     public final static String BGT_TABLE="Budget"; // name of table
 
-    public final static String BGT_ID="txn_BALANCES_id"; // id value for user
+    public final static String BGT_ID="txn_BUDGET_id"; // budget id
     public final static String BGT_PTY_ID="partyId";  // name of user
-    public final static String BGT_TYPE="type";  // pass of user
+    public final static String BGT_TYPE="type";  // CREDIT / DEBIT
     public final static String BGT_DATE="txn_date";  // pass of user
     public final static String BGT_AMOUNT="amount"; // account number of user
     public final static String BGT_COMMENTS="comments";  // cutoff date of user

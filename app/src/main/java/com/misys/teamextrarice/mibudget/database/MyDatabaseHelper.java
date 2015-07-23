@@ -15,14 +15,15 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
 
     private static final int DATABASE_VERSION = 2;
     // Database creation sql statement
-    private static final String DATABASE_CREATE_USERS = "create table Parties ( _id integer primary key,name text not null" +
-            ",password text ,acctNo integer, cutoffDay integer, birthDate date, job text);";
-    private static final String DATABASE_CREATE_SAVINGS = "create table Savings ( txn_SAVINGS_id integer primary key AUTO_INCREMENT" +
-            ",partyId FOREIGN KEY REFERENCES Parties(_id), txn_date date, amount integer, comments text);";
-    private static final String DATABASE_CREATE_BUDGET = "create table Budget ( txn_BALANCES_id integer primary key AUTO_INCREMENT" +
-            ",partyId FOREIGN KEY REFERENCES Parties(_id), type text not null, txn_date date, amount integer, comments text);";
-    private static final String DATABASE_CREATE_INCEXP = "create table IncExp ( txn_INCEXP_id integer primary key AUTO_INCREMENT" +
-            ",partyId FOREIGN KEY REFERENCES Parties(_id), type text not null, effectiveDay date, amount integer, comments text);";
+    private static final String DATABASE_CREATE_USERS = "CREATE TABLE Parties ( _id INTEGER PRIMARY KEY AUTO_INCREMENT,name TEXT NOT NULL" +
+            ",password TEXT ,acctNo INTEGER, cutoffDay INTEGER, birthDate DATE, job TEXT);";
+    private static final String DATABASE_CREATE_SAVINGS = "CREATE TABLE Savings ( txn_SAVINGS_id INTEGER PRIMARY KEY AUTO_INCREMENT" +
+            ",partyId FOREIGN KEY REFERENCES Parties(_id), txn_date DATE, amount INTEGER, comments TEXT);";
+    private static final String DATABASE_CREATE_BUDGET = "CREATE TABLE Budget ( txn_BUDGET_id INTEGER PRIMARY KEY AUTO_INCREMENT" +
+            ",partyId FOREIGN KEY REFERENCES Parties(_id), type TEXT NOT NULL, txn_date DATE, amount INTEGER, comments TEXT);";
+    private static final String DATABASE_CREATE_INCEXP = "CREATE TABLE IncExp ( txn_INCEXP_id INTEGER PRIMARY KEY AUTO_INCREMENT" +
+            ",partyId FOREIGN KEY REFERENCES Parties(_id), type TEXT NOT NULL, effectiveDay DATE, amount INTEGER, comments TEXT);";
+
     public MyDatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
