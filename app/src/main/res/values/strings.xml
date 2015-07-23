@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">MiBudget</string>
 
-    <string name="title_section1">User Detail</string>
+    <string name="title_section1">User Details</string>
     <string name="title_section2">Balance Details</string>
     <string name="title_section3">Tools</string>
     <string name="title_section4">Logout</string>
