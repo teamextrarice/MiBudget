@@ -1,6 +1,7 @@
 package com.misys.teamextrarice.mibudget.activities;
 
 import android.app.Activity;
+import android.net.Uri;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
@@ -26,7 +27,8 @@ import com.misys.teamextrarice.mibudget.fragments.UserDetailsFragment;
 
 
 public class MainScreenActivity extends ActionBarActivity
-        implements NavigationDrawerFragment.NavigationDrawerCallbacks {
+        implements NavigationDrawerFragment.NavigationDrawerCallbacks,
+                    UserDetailsFragment.OnFragmentInteractionListener {
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
      */
@@ -168,6 +170,11 @@ public class MainScreenActivity extends ActionBarActivity
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public void onFragmentInteraction(Uri uri) {
+
+    }
+
     /**
      * A placeholder fragment containing a simple view.
      */
@@ -206,6 +213,8 @@ public class MainScreenActivity extends ActionBarActivity
             ((MainScreenActivity) activity).onSectionAttached(
                     getArguments().getInt(ARG_SECTION_NUMBER));
         }
+
+
     }
 
 }
