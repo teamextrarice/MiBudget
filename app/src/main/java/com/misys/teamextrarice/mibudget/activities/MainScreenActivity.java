@@ -1,6 +1,7 @@
 package com.misys.teamextrarice.mibudget.activities;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
@@ -114,6 +115,10 @@ public class MainScreenActivity extends ActionBarActivity
 
         switch (position) {
             case 0:
+                Intent main = new Intent(getApplicationContext(),
+                        MainScreenActivity.class);
+                startActivity(main);
+                finish();
                 break;
             case 1:  fragmentManager.beginTransaction()
                     .replace(R.id.container, UserDetailsFragment.newInstance())
