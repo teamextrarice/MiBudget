@@ -110,7 +110,9 @@ public class MainScreenActivity extends ActionBarActivity
         FragmentManager fragmentManager = getSupportFragmentManager();
 
         switch (position) {
-            case 0:
+            case 0: fragmentManager.beginTransaction()
+                    .replace(R.id.fragment_placeholder, HomeFragment.newInstance())
+                    .commit();
                 break;
 
             case 1:
