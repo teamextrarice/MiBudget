@@ -15,7 +15,7 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
 
     private static final int DATABASE_VERSION = 2;
     // Database creation sql statement
-    private static final String DATABASE_CREATE_USERS = "CREATE TABLE Parties ( _id INTEGER PRIMARY KEY AUTOINCREMENT,name TEXT NOT NULL" +
+    private static final String DATABASE_CREATE_USERS = "CREATE TABLE Parties ( _id INTEGER PRIMARY KEY AUTOINCREMENT,name TEXT NOT NULL UNIQUE" +
             ",password TEXT ,acctNo INTEGER, cutoffDay INTEGER, birthDate DATE, job TEXT);";
     private static final String DATABASE_CREATE_SAVINGS = "CREATE TABLE Savings ( txn_SAVINGS_id INTEGER PRIMARY KEY AUTOINCREMENT" +
             ",partyId FOREIGN KEY REFERENCES Parties(_id), txn_date DATE, amount INTEGER, comments TEXT);";
