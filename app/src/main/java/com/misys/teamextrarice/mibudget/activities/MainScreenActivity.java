@@ -112,10 +112,14 @@ public class MainScreenActivity extends ActionBarActivity
         // update the main content by replacing fragments
         FragmentManager fragmentManager = getSupportFragmentManager();
 
-        if (position == 1) {
-            fragmentManager.beginTransaction()
+        switch (position) {
+            case 1:  fragmentManager.beginTransaction()
                     .replace(R.id.container, UserDetailsFragment.newInstance())
                     .commit();
+                     break;
+            default:
+                break;
+
         }
 
     }
