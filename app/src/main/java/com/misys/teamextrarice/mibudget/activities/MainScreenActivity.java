@@ -84,59 +84,7 @@ public class MainScreenActivity extends ActionBarActivity
 
 
 
-        ArrayList<Entry> values1 = new ArrayList<Entry>();
 
-
-        Entry c1e1 = new Entry(40.000f, 0); // 0 == Budget
-        values1.add(c1e1);
-        Entry c1e2 = new Entry(50.000f, 1); // 1 == Expenses
-        values1.add(c1e2);
-        Entry c1e3 = new Entry(20.000f, 2); // 2 == Other
-        values1.add(c1e3);
-        // and so on ...
-
-        PieDataSet setComp1 = new PieDataSet(values1, "Money Floyd");
-        setComp1.setAxisDependency(AxisDependency.LEFT);
-
-        ArrayList<PieDataSet> dataSets = new ArrayList<PieDataSet>();
-        dataSets.add(setComp1);
-
-        ArrayList<String> xVals = new ArrayList<String>();
-        xVals.add("Budget");
-        xVals.add("Expenses");
-        xVals.add("Other");
-
-
-        ArrayList<Integer> colors = new ArrayList<Integer>();
-
-        for (int c : ColorTemplate.VORDIPLOM_COLORS)
-            colors.add(c);
-
-        for (int c : ColorTemplate.JOYFUL_COLORS)
-            colors.add(c);
-
-        for (int c : ColorTemplate.COLORFUL_COLORS)
-            colors.add(c);
-
-        for (int c : ColorTemplate.LIBERTY_COLORS)
-            colors.add(c);
-
-        for (int c : ColorTemplate.PASTEL_COLORS)
-            colors.add(c);
-
-        colors.add(ColorTemplate.getHoloBlue());
-
-        setComp1.setColors(colors);
-
-        PieData data = new PieData(xVals, setComp1);
-
-
-        PieChart chart = (PieChart) findViewById(R.id.chart);
-
-
-        chart.setData(data);
-        chart.setCenterText("DAN IS THE MAN."); //change to budget
-        chart.invalidate();
 
         AsyncCallWS task = new AsyncCallWS();
         //Call execute
