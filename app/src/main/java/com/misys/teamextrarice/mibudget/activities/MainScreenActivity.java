@@ -111,7 +111,9 @@ public class MainScreenActivity extends ActionBarActivity
             case 0:
                 break;
 
-            case 1:  fragmentManager.beginTransaction()
+            case 1: fragmentManager.beginTransaction().remove(R.id.fragment_home).commit();
+
+                    fragmentManager.beginTransaction()
                     .replace(R.id.drawer_layout, UserDetailsFragment.newInstance())
                     .commit();
                      break;
