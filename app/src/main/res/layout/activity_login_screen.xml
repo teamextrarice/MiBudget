@@ -20,6 +20,7 @@
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:id="@+id/user_input"
             android:hint="Input User"/>
 
     </LinearLayout>
@@ -36,7 +37,8 @@
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="Input Password"/>
+            android:hint="Input Password"
+            android:id="@+id/password_input"/>
 
     </LinearLayout>
     <LinearLayout
@@ -44,16 +46,22 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
         <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Log in"/>
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="login()"
+            android:text="Log in"/>
+
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Sign Up"/>
+            android:text="Sign Up"
+            />
 
     </LinearLayout>
-
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/error_text"/>
 
 
 </LinearLayout>
