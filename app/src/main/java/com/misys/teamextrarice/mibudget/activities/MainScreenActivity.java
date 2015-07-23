@@ -65,10 +65,7 @@ public class MainScreenActivity extends ActionBarActivity
     protected void onResume() {
         super.onResume();
 
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction()
-                .add(R.id.drawer_layout, HomeFragment.newInstance())
-                .commit();
+
     }
 
     @Override
@@ -77,7 +74,10 @@ public class MainScreenActivity extends ActionBarActivity
 
         setContentView(R.layout.activity_main_screen);
 
-
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction()
+                .add(R.id.drawer_layout, HomeFragment.newInstance())
+                .commit();
 
         mNavigationDrawerFragment = (NavigationDrawerFragment)
                 getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);
@@ -111,13 +111,12 @@ public class MainScreenActivity extends ActionBarActivity
             case 0:
                 break;
 
-
             case 1:  fragmentManager.beginTransaction()
-                    .replace(R.id.container, UserDetailsFragment.newInstance())
+                    .replace(R.id.drawer_layout, UserDetailsFragment.newInstance())
                     .commit();
                      break;
             case 2:  fragmentManager.beginTransaction()
-                    .replace(R.id.container, BalanceDetailsFragment.newInstance())
+                    .replace(R.id.drawer_layout, BalanceDetailsFragment.newInstance())
                     .commit();
                 break;
             case 3:
