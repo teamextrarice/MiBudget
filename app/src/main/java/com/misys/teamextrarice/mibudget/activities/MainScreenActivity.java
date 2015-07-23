@@ -135,6 +135,11 @@ public class MainScreenActivity extends ActionBarActivity
         //Call execute
         task.execute();
 
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction()
+                .add(R.id.drawer_layout, HomeFragment.newInstance())
+                .commit();
+
 
     }
 
