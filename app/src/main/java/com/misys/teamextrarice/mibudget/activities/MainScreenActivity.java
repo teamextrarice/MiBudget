@@ -120,10 +120,7 @@ public class MainScreenActivity extends ActionBarActivity
 
         switch (position) {
             case 0:
-                Intent main = new Intent(getApplicationContext(),
-                        MainScreenActivity.class);
-                startActivity(main);
-                finish();
+
                 break;
             case 1:  fragmentManager.beginTransaction()
                     .replace(R.id.container, UserDetailsFragment.newInstance())
