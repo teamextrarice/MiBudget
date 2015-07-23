@@ -62,10 +62,6 @@ public class MainScreenActivity extends ActionBarActivity
                 (DrawerLayout) findViewById(R.id.drawer_layout));
 
 
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction()
-                .replace(R.id.container, HomeFragment.newInstance())
-                .commit();
 
 
         ArrayList<Entry> values1 = new ArrayList<Entry>();
@@ -120,6 +116,12 @@ public class MainScreenActivity extends ActionBarActivity
         chart.setData(data);
         chart.setCenterText("DAN IS THE MAN."); //change to budget
         chart.invalidate();
+
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction()
+                .replace(R.id.container, HomeFragment.newInstance())
+                .commit();
+
     }
 
     @Override
