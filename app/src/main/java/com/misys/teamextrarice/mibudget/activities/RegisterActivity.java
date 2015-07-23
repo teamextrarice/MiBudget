@@ -3,6 +3,7 @@ package com.misys.teamextrarice.mibudget.activities;
 import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.text.InputType;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -45,7 +46,10 @@ public class RegisterActivity extends ActionBarActivity  {
         password = (EditText)findViewById(R.id.pw_input);
         acctnum = (EditText)findViewById(R.id.acctnum_input);
         cutOffDate = (EditText)findViewById(R.id.cutoffdate_input);
+        cutOffDate.setInputType(InputType.TYPE_NULL);
+        cutOffDate.requestFocus();
         birthDate = (EditText)findViewById(R.id.birthdate_input);
+        birthDate.setInputType(InputType.TYPE_NULL);
         job = (EditText)findViewById(R.id.job_input);
     }
 
