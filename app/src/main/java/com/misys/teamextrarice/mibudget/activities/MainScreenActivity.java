@@ -51,7 +51,7 @@ public class MainScreenActivity extends ActionBarActivity
                 (DrawerLayout) findViewById(R.id.drawer_layout));
 
         ArrayList<Entry> values1 = new ArrayList<Entry>();
-        ArrayList<Entry> values2 = new ArrayList<Entry>();
+
 
         Entry c1e1 = new Entry(100.000f, 0); // 0 == quarter 1
         values1.add(c1e1);
@@ -59,19 +59,11 @@ public class MainScreenActivity extends ActionBarActivity
         values1.add(c1e2);
         // and so on ...
 
-        Entry c2e1 = new Entry(120.000f, 0); // 0 == quarter 1
-        values2.add(c2e1);
-        Entry c2e2 = new Entry(110.000f, 1); // 1 == quarter 2 ...
-        values2.add(c2e2);
-
         PieDataSet setComp1 = new PieDataSet(values1, "Company 1");
         setComp1.setAxisDependency(AxisDependency.LEFT);
-        PieDataSet setComp2 = new PieDataSet(values2, "Company 2");
-        setComp2.setAxisDependency(AxisDependency.LEFT);
 
         ArrayList<PieDataSet> dataSets = new ArrayList<PieDataSet>();
         dataSets.add(setComp1);
-        dataSets.add(setComp2);
 
         ArrayList<String> xVals = new ArrayList<String>();
         xVals.add("1.Q"); xVals.add("2.Q"); xVals.add("3.Q"); xVals.add("4.Q");
@@ -82,6 +74,7 @@ public class MainScreenActivity extends ActionBarActivity
         PieChart chart = (PieChart) findViewById(R.id.chart);
 
         chart.setData(data);
+        chart.setCenterText("DAN IS THE MAN.");
         chart.invalidate();
     }
 
