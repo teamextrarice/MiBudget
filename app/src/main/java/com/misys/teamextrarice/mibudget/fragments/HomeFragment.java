@@ -125,7 +125,7 @@ public class HomeFragment extends Fragment {
         PieData data = new PieData(xVals, setComp1);
 
 
-        PieChart chart = (PieChart) getView().findViewById(R.id.chart);
+        PieChart chart = (PieChart) view.findViewById(R.id.chart);
 
 
         chart.setData(data);
