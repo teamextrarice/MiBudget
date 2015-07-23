@@ -7,7 +7,7 @@
      space available using match_parent in both dimensions. -->
     <LinearLayout android:id="@+id/container" android:layout_width="match_parent"
         android:layout_height="match_parent" android:orientation="vertical">
-        <RecyclerView
+        <android.support.v7.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="match_parent">
             <com.github.mikephil.charting.charts.PieChart
@@ -28,7 +28,7 @@
 
                 </RelativeLayout>
             </android.support.v7.widget.CardView>
-        </RecyclerView>
+        </android.support.v7.widget.RecyclerView>
 
     </LinearLayout>
 
