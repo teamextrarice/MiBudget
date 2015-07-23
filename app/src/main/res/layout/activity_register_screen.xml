@@ -75,7 +75,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:hint="Input Cut Off Date"
-            android:inputType="date"
             android:id="@+id/cutoffdate_input"
             />
 
@@ -95,7 +94,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:hint="Input Birthdate"
-            android:inputType="date"
             android:id="@+id/birthdate_input"
 
             />
