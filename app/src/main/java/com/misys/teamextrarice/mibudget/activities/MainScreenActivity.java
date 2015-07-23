@@ -4,18 +4,23 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.support.v4.widget.DrawerLayout;
+import android.widget.TextView;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import com.github.mikephil.charting.components.YAxis.AxisDependency;
 import com.github.mikephil.charting.data.PieDataSet;
@@ -27,6 +32,9 @@ import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.utils.ColorTemplate;
 import com.misys.teamextrarice.mibudget.fragments.UserDetailsFragment;
+import com.misys.teamextrarice.mibudget.soaphandler.AccountBalanceEqSoapHandler;
+
+import org.w3c.dom.Text;
 
 
 public class MainScreenActivity extends ActionBarActivity
@@ -122,6 +130,10 @@ public class MainScreenActivity extends ActionBarActivity
                 .replace(R.id.container, HomeFragment.newInstance())
                 .commit();
 
+        AsyncCallWS task = new AsyncCallWS();
+        //Call execute
+        task.execute();
+
     }
 
     @Override
@@ -213,6 +225,46 @@ public class MainScreenActivity extends ActionBarActivity
 
     @Override
     public void onFragmentInteraction(Uri uri) {
+
+    }
+
+    private class AsyncCallWS extends AsyncTask<String, Void, Void> {
+        @Override
+        protected Void doInBackground(String... params) {
+            //Log.i(TAG, "doInBackground");
+            //getFahrenheit(celcius);
+            //getAcctDetails(celcius);
+            AccountBalanceEqSoapHandler handler = new AccountBalanceEqSoapHandler("0000450044003");
+            handler.getAcctDetails();
+            HashMap<String,String> accBasicDetMap = handler.getAcctBasicDetailMap();
+            HashMap<String,String> accBalanceDetMap = handler.getAcctBalanceDetailMap();
+
+            String acctref = accBasicDetMap.get("acctref");
+            String custName = accBasicDetMap.get("custname");
+            String ledgerbalance = accBalanceDetMap.get("ledgerbalance");
+
+            TextView sample = (TextView)findViewById(R.id.sample_text);
+            sample.setText("acctref: " + acctref + "\n" + "custname: " +custName + "\n" + "ledgerbalance: " + ledgerbalance);
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void result) {
+//            Log.i(TAG, "onPostExecute");
+//            tv.setText(fahren + "° F");
+        }
+
+        @Override
+        protected void onPreExecute() {
+//            Log.i(TAG, "onPreExecute");
+//            tv.setText("Calculating...");
+        }
+
+        @Override
+        protected void onProgressUpdate(Void... values) {
+            //Log.i(TAG, "onProgressUpdate");
+        }
 
     }
 

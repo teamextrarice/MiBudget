@@ -12,6 +12,7 @@ import org.kxml2.kdom.Element;
 import org.kxml2.kdom.Node;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Created by jozaldua on 7/23/2015.
@@ -24,8 +25,19 @@ public class AccountBalanceEqSoapHandler {
     private final String WEB_URL = "http://manvsweqdv0003.misys.global.ad:9081/bfweb/services/EQ_CMN_readAccountDetails";
     private final String WEB_SOAP_ACTION = "http://manvsweqdv0003.misys.global.ad:9081/bfweb/services/EQ_CMN_readAccountDetailsGRF_SRV";
 
+    private HashMap<String,String>acctBasicDetailMap = new HashMap<String,String>();
+    private HashMap<String,String>acctBalanceDetailMap = new HashMap<String,String>();
+
     public AccountBalanceEqSoapHandler(String message){
         this.acctNum = message;
+    }
+
+    public HashMap<String, String> getAcctBasicDetailMap() {
+        return acctBasicDetailMap;
+    }
+
+    public HashMap<String, String> getAcctBalanceDetailMap() {
+        return acctBalanceDetailMap;
     }
 
     public String getacctNum() {
@@ -68,7 +80,7 @@ public class AccountBalanceEqSoapHandler {
         SoapObject rqHeader = new SoapObject(HEAD_NAMESPACE,"rqHeader");
 
         ArrayList<PropertyInfo> props = new ArrayList<PropertyInfo>();
-        for(int i = 0; i < 8; i++){
+        for(int i = 0; i < 6; i++){
             PropertyInfo pi = new PropertyInfo();
             pi.setNamespace(HEAD_NAMESPACE);
             pi.setType(PropertyInfo.STRING_CLASS);
@@ -84,13 +96,11 @@ public class AccountBalanceEqSoapHandler {
         props.get(3).setName("userId");
         props.get(3).setValue("superit");
 
-        for(int i = 4; i < 8; i++){
+        for(int i = 4; i < 6; i++){
             props.get(i).setName("responseFilter");
         }
         props.get(4).setValue("AccBasicDetail");
         props.get(5).setValue("AccBalanceDetail");
-        props.get(6).setValue("AccStmtDetail");
-        props.get(7).setValue("AccSpecialConditions");
 
         for(PropertyInfo prop: props)
             rqHeader.addProperty(prop);
@@ -126,7 +136,7 @@ public class AccountBalanceEqSoapHandler {
         HttpTransportSE androidHttpTransport = new HttpTransportSE(WEB_URL);
 
         try {
-            //Invole web service
+            //Invoke web service
             androidHttpTransport.debug = true;
             androidHttpTransport.call(WEB_SOAP_ACTION, envelope);
             //Get the response
@@ -134,43 +144,94 @@ public class AccountBalanceEqSoapHandler {
 
             Log.d("dump Request: ", androidHttpTransport.requestDump);
             Log.d("dump response: ", androidHttpTransport.responseDump);
-            //Assign it to fahren static variable
+
             SoapObject serviceDataRes = (SoapObject)response.getProperty(1);
             SoapObject accBasicDetail = (SoapObject)serviceDataRes.getProperty(0);
-            int accBasicDetailCount = accBasicDetail.getPropertyCount();
-            StringBuffer buf = new StringBuffer();
-            PropertyInfo prop = null;
-            for(int i = 0;i < accBasicDetailCount;i++){
-                if(accBasicDetail.getProperty(i) instanceof SoapPrimitive) {
-                    prop = new PropertyInfo();
-                    accBasicDetail.getPropertyInfo(i, prop);
-                    buf.append(prop.getName() + " = " + prop.getValue());
-                    buf.append("\n");
-                }
-                else{
-                    prop = new PropertyInfo();
-                    accBasicDetail.getPropertyInfo(i, prop);
-                    buf.append("<" + prop.getName() + ">");
-                    buf.append("\n");
-                    SoapObject accBasicObj = (SoapObject)accBasicDetail.getProperty(i);
-                    for(int j = 0;j < accBasicObj.getPropertyCount();j++){
-                        prop = new PropertyInfo();
-                        accBasicObj.getPropertyInfo(j, prop);
-                        buf.append(prop.getName() + " = " + prop.getValue());
-                        buf.append("\n");
-                    }
-                }
+            SoapObject accBalanceDetail = (SoapObject)serviceDataRes.getProperty(1);
 
 
+            setAccountBasicDetail(accBasicDetail);
+            setAccountBalanceDetail(accBalanceDetail);
 
-            }
-            this.response = buf.toString();
+//            int accBasicDetailCount = accBasicDetail.getPropertyCount();
+//            StringBuffer buf = new StringBuffer();
+//            PropertyInfo prop = null;
+//            for(int i = 0;i < accBasicDetailCount;i++){
+//                if(accBasicDetail.getProperty(i) instanceof SoapPrimitive) {
+//                    prop = new PropertyInfo();
+//                    accBasicDetail.getPropertyInfo(i, prop);
+//                    buf.append(prop.getName() + " = " + prop.getValue());
+//                    buf.append("\n");
+//                }
+//                else{
+//                    prop = new PropertyInfo();
+//                    accBasicDetail.getPropertyInfo(i, prop);
+//                    buf.append("<" + prop.getName() + ">");
+//                    buf.append("\n");
+//                    SoapObject accBasicObj = (SoapObject)accBasicDetail.getProperty(i);
+//                    for(int j = 0;j < accBasicObj.getPropertyCount();j++){
+//                        prop = new PropertyInfo();
+//                        accBasicObj.getPropertyInfo(j, prop);
+//                        buf.append(prop.getName() + " = " + prop.getValue());
+//                        buf.append("\n");
+//                    }
+//                }
+//
+//
+//
+//            }
+//            this.response = buf.toString();
 
         } catch (Exception e) {
             Log.d("dump Request: " ,androidHttpTransport.requestDump);
             Log.d("dump response: " ,androidHttpTransport.responseDump);
             e.printStackTrace();
         }
+    }
+
+
+    private void setAccountBasicDetail(SoapObject accBasicDetail){
+        PropertyInfo prop = new PropertyInfo();
+        //acct ref
+        SoapObject accIdOut = (SoapObject)accBasicDetail.getProperty(0);
+        accIdOut.getPropertyInfo(0,prop);
+        acctBasicDetailMap.put("acctref",prop.getValue().toString());
+
+        //branch
+        SoapObject branchIdOut = (SoapObject)accBasicDetail.getProperty(1);
+        branchIdOut.getPropertyInfo(1,prop);
+        acctBasicDetailMap.put("branch",prop.getValue().toString());
+
+        //acct ccy
+        accBasicDetail.getPropertyInfo(2,prop);
+        acctBasicDetailMap.put("acctccy",prop.getValue().toString());
+
+        //acct type desc
+        accBasicDetail.getPropertyInfo(4,prop);
+        acctBasicDetailMap.put("accttypedesc",prop.getValue().toString());
+
+        //cust ext id
+        SoapObject custIdOut = (SoapObject)accBasicDetail.getProperty(7);
+        custIdOut.getPropertyInfo(3,prop);
+        acctBasicDetailMap.put("custextid", prop.getValue().toString());
+
+        //cust name
+        accBasicDetail.getPropertyInfo(8, prop);
+        acctBasicDetailMap.put("custname",prop.getValue().toString());
+
+    }
+
+    private void setAccountBalanceDetail(SoapObject accBalanceDetail){
+        PropertyInfo prop = new PropertyInfo();
+
+        //ledger balance
+        accBalanceDetail.getPropertyInfo(0,prop);
+        acctBalanceDetailMap.put("ledgerbalance",prop.getValue().toString());
+
+        //avail balance
+        accBalanceDetail.getPropertyInfo(7,prop);
+        acctBalanceDetailMap.put("availbalance",prop.getValue().toString());
+
     }
 
     private Element buildAuthHeader() {
