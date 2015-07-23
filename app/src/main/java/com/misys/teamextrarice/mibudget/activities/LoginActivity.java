@@ -1,6 +1,7 @@
 package com.misys.teamextrarice.mibudget.activities;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -23,6 +24,10 @@ public class LoginActivity extends ActionBarActivity {
     private EditText userInput;
     private EditText passwordInput;
     private TextView errorText;
+
+    public static final String PREFS_NAME = "LoginPrefFile";
+    private static final String PREF_USERNAME = "username";
+    private static final String PREF_PASSWORD = "password";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +70,13 @@ public class LoginActivity extends ActionBarActivity {
             if(userInput.getText().toString().equals(username) && passwordInput.getText().toString().equals(password)){
                 Intent mainIntent = new Intent(this,MainScreenActivity.class);
                 mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+                SharedPreferences pref = getSharedPreferences(PREFS_NAME,MODE_PRIVATE);
+                SharedPreferences.Editor editor = pref.edit();
+                editor.putString(PREF_USERNAME,username);
+                editor.putString(PREF_PASSWORD,password);
+                editor.commit();
+
                 getApplicationContext().startActivity(mainIntent);
                 Toast.makeText(getApplicationContext(), "LOGIN SUCCESS", Toast.LENGTH_SHORT).show();
             }
