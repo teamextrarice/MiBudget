@@ -76,7 +76,7 @@ public class MyDB{
 
     public Cursor selectByName(String username) {
         String[] cols = new String[] {PTY_ID, PTY_NAME, PTY_PWD};
-        Cursor mCursor = database.query(true, PTY_TABLE,cols,PTY_NAME + " = " + username
+        Cursor mCursor = database.query(true, PTY_TABLE,cols,PTY_NAME + " = '" + username + "'"
                 , null, null, null, null, null);
         if (mCursor != null) {
             mCursor.moveToFirst();
