@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import com.github.mikephil.charting.components.YAxis.AxisDependency;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieData;
+import com.misys.teamextrarice.mibudget.fragments.HomeFragment;
 import com.misys.teamextrarice.mibudget.fragments.NavigationDrawerFragment;
 import com.misys.teamextrarice.mibudget.R;
 import com.github.mikephil.charting.charts.PieChart;
@@ -53,6 +54,13 @@ public class MainScreenActivity extends ActionBarActivity
         mNavigationDrawerFragment.setUp(
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
+
+
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction()
+                .replace(R.id.container, UserDetailsFragment.newInstance())
+                .commit();
+
 
         ArrayList<Entry> values1 = new ArrayList<Entry>();
 
@@ -114,9 +122,12 @@ public class MainScreenActivity extends ActionBarActivity
         FragmentManager fragmentManager = getSupportFragmentManager();
 
         switch (position) {
-            case 0:
-
+            case 0: fragmentManager.beginTransaction()
+                    .replace(R.id.container, HomeFragment.newInstance())
+                    .commit();
                 break;
+
+
             case 1:  fragmentManager.beginTransaction()
                     .replace(R.id.container, UserDetailsFragment.newInstance())
                     .commit();
