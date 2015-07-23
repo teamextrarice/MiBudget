@@ -31,7 +31,8 @@ import com.misys.teamextrarice.mibudget.fragments.UserDetailsFragment;
 
 public class MainScreenActivity extends ActionBarActivity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks,
-                    UserDetailsFragment.OnFragmentInteractionListener {
+                    UserDetailsFragment.OnFragmentInteractionListener,
+                    HomeFragment.OnFragmentInteractionListener {
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
      */
