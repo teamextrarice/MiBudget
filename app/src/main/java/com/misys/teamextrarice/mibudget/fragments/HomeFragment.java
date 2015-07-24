@@ -3,6 +3,7 @@ package com.misys.teamextrarice.mibudget.fragments;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -17,6 +18,7 @@ import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.utils.ColorTemplate;
 import com.misys.teamextrarice.mibudget.R;
+import com.misys.teamextrarice.mibudget.database.MyDB;
 import com.misys.teamextrarice.mibudget.util.BudgetUtil;
 
 import java.util.ArrayList;
@@ -91,6 +93,8 @@ public class HomeFragment extends Fragment {
 
         SharedPreferences pref = this.getActivity().getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
         final String username = pref.getString(PREF_USERNAME, "");
+        MyDB db = MyDB.getInstance();
+        db.setdbHelper(this.getActivity().getBaseContext());
 
         BudgetUtil budgetUtil = new BudgetUtil(this.getActivity().getBaseContext());
 
@@ -103,7 +107,9 @@ public class HomeFragment extends Fragment {
         Entry c1e2 = new Entry(Integer.parseInt(budgetUtil.sumExpenses().toString()), 1); // 1 == Expenses
         values1.add(c1e2);
         //Entry c1e3 = new Entry(20.000f, 2); // 2 == Other
-        Entry c1e3 = new Entry(Integer.parseInt(budgetUtil.sumMonthDailyExp().toString()), 2); // 2 == Other
+        Cursor cursor = db.selectByName(username);
+        cursor.moveToFirst();
+        Entry c1e3 = new Entry(Integer.parseInt(cursor.getString(cursor.getColumnIndex("cutoffDay"))), 2); // 2 == Other
         values1.add(c1e3);
         // and so on ...
 

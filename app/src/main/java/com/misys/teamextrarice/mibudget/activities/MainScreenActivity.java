@@ -34,6 +34,7 @@ import com.misys.teamextrarice.mibudget.R;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.utils.ColorTemplate;
+import com.misys.teamextrarice.mibudget.fragments.TransactionHistoryFragment;
 import com.misys.teamextrarice.mibudget.fragments.UserDetailsFragment;
 import com.misys.teamextrarice.mibudget.soaphandler.AccountBalanceEqSoapHandler;
 
@@ -44,7 +45,8 @@ public class MainScreenActivity extends ActionBarActivity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks,
                     UserDetailsFragment.OnFragmentInteractionListener,
                     HomeFragment.OnFragmentInteractionListener,
-                    BalanceDetailsFragment.OnFragmentInteractionListener{
+                    BalanceDetailsFragment.OnFragmentInteractionListener,
+                   TransactionHistoryFragment.OnFragmentInteractionListener{
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
      */
@@ -126,7 +128,7 @@ public class MainScreenActivity extends ActionBarActivity
                     .commit();
                 break;
             case 3:  fragmentManager.beginTransaction()
-                    .replace(R.id.fragment_placeholder, BalanceDetailsFragment.newInstance())
+                    .replace(R.id.fragment_placeholder, TransactionHistoryFragment.newInstance())
                     .commit();
                 break;
             case 4:
