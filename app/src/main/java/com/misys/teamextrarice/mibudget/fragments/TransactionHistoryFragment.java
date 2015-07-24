@@ -80,7 +80,7 @@ public class TransactionHistoryFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_transaction_history, container, false);
 
-        String[] transactions = new String[] {"Deposit 1,200.", "Checked balance", "Transferred 1.00."};
+        String[] transactions = new String[]{"Deposit 1,200.", "Checked balance", "Transferred 1.00."};
 
         ArrayAdapter<String> transAdapter = new ArrayAdapter<String>(view.getContext(), R.layout.fragment_transaction_history, transactions);
 
@@ -88,7 +88,7 @@ public class TransactionHistoryFragment extends Fragment {
         ListView transList = (ListView) view.findViewById(R.id.transaction_list);
         transList.setAdapter(transAdapter);
         return view;
-
+    }
 
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
@@ -108,7 +108,7 @@ public class TransactionHistoryFragment extends Fragment {
         }
     }
 
-    @
+
     public void onDetach() {
         super.onDetach();
         mListener = null;
