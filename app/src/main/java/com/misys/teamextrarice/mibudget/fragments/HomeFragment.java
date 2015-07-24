@@ -10,6 +10,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.YAxis;
@@ -38,6 +39,10 @@ public class HomeFragment extends Fragment {
     public static final String PREFS_NAME = "LoginPrefFile";
     private static final String PREF_USERNAME = "username";
     private static final String PREF_PASSWORD = "password";
+    private static final String PREF_ACCTID = "acctid";
+    private static final String PREF_CUTOFF = "cutoffday";
+    private static final String PREF_BDAY = "bday";
+    private static final String PREF_JOB = "job";
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -93,6 +98,7 @@ public class HomeFragment extends Fragment {
 
         SharedPreferences pref = this.getActivity().getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
         final String username = pref.getString(PREF_USERNAME, "");
+        final String cutoff = pref.getString(PREF_CUTOFF, "");
         MyDB db = MyDB.getInstance();
         db.setdbHelper(this.getActivity().getBaseContext());
 
@@ -100,28 +106,16 @@ public class HomeFragment extends Fragment {
 
         //Entry c1e1 = new Entry(40.000f, 0); // 0 == Budget
         budgetUtil.sumExpenses();
-        Entry c1e1 = new Entry( Integer.parseInt(budgetUtil.sumIncome().toString()) -
-                Integer.parseInt(budgetUtil.sumExpenses().toString()), 0); // 0 == Budget
+        Entry c1e1 = new Entry( Integer.parseInt(budgetUtil.sumMonthIncome(cutoff).toString()) -
+                Integer.parseInt(budgetUtil.sumMonthExpense(cutoff).toString()), 0); // 0 == Budget
         values1.add(c1e1);
         //Entry c1e2 = new Entry(50.000f, 1); // 1 == Expenses
-        Entry c1e2 = new Entry(Integer.parseInt(budgetUtil.sumExpenses().toString()), 1); // 1 == Expenses
+        Entry c1e2 = new Entry(Integer.parseInt(budgetUtil.sumMonthExpense(cutoff).toString()), 1); // 1 == Expenses
         values1.add(c1e2);
         //Entry c1e3 = new Entry(20.000f, 2); // 2 == Other
         Cursor cursor = db.selectByName(username);
         //cursor.moveToFirst();
-        String cutoff ="";
-        int cutoffNum = 0;
-        if(cursor != null) {
-            while (!cursor.isAfterLast()) {
-                cutoff = cursor.getString(cursor.getColumnIndex("cutoffDay"));
-                cursor.moveToNext();
-            }
-        }
-        if(!"".equals(cutoff)){
-            cutoffNum = Integer.parseInt(cutoff);
-        }
-
-        Entry c1e3 = new Entry(cutoffNum, 2); // 2 == Other
+        Entry c1e3 = new Entry(Integer.parseInt(budgetUtil.sumMonthDailyExp(cutoff).toString()), 1); // 2 == Other
         values1.add(c1e3);
         // and so on ...
 
@@ -167,6 +161,9 @@ public class HomeFragment extends Fragment {
         chart.setData(data);
         chart.setCenterText("DAN IS THE MAN."); //change to budget
         chart.invalidate();
+
+        TextView savings = (TextView) view.findViewById(R.id.card_savings);
+        savings.setText("20000");
 
         return view;
     }
