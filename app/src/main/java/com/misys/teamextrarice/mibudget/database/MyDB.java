@@ -137,7 +137,7 @@ public class MyDB{
 
     public Cursor selectUserSavings(String id) {
         String[] cols = new String[] {SVG_ID, SVG_PTY_ID, SVG_DATE, SVG_AMOUNT, SVG_COMMENTS};
-        Cursor mCursor = database.query(false, SVG_TABLE,cols, SVG_ID + " = '" + id + "'"
+        Cursor mCursor = database.query(false, SVG_TABLE,cols, SVG_PTY_ID + " = '" + id + "'"
                 , null, null, null, null, null);
         if (mCursor != null) {
             mCursor.moveToFirst();

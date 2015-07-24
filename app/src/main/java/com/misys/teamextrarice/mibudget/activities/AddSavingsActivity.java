@@ -34,7 +34,7 @@ public class AddSavingsActivity extends ActionBarActivity {
         final EditText commentInput = (EditText) findViewById(R.id.comment_input);
         final EditText dateInput = (EditText) findViewById(R.id.date_input);
         Button addButton = (Button) findViewById(R.id.add_button);
-        Button cancelButton = (Button) findViewById(R.id.cancel_button);
+        //Button cancelButton = (Button) findViewById(R.id.cancel_button);
 
         addButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
