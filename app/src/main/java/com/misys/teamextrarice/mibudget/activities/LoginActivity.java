@@ -70,6 +70,7 @@ public class LoginActivity extends ActionBarActivity {
             }
             if(userInput.getText().toString().equals(username) && passwordInput.getText().toString().equals(password)){
                 Intent mainIntent = new Intent(this,MainScreenActivity.class);
+                mainIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
                 SharedPreferences pref = getSharedPreferences(PREFS_NAME,MODE_PRIVATE);
