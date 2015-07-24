@@ -4,11 +4,17 @@ import android.app.Activity;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.misys.teamextrarice.mibudget.R;
+import com.misys.teamextrarice.mibudget.adapter.RVAdapter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -70,7 +76,21 @@ public class TransactionHistoryFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_transaction_history, container, false);
+        View view = inflater.inflate(R.layout.fragment_transaction_history, container, false);
+        List<String> details = new ArrayList<String>();
+
+        details.add("Test");
+        details.add("Sample");
+        details.add("Sampleweeeee");
+        RecyclerView rv = (RecyclerView) view.findViewById(R.id.rv);
+        RVAdapter adapter = new RVAdapter();
+        LinearLayoutManager layoutManager = new LinearLayoutManager(view.getContext());
+        rv.setLayoutManager(layoutManager);
+        rv.setAdapter(adapter);
+
+
+
+        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
