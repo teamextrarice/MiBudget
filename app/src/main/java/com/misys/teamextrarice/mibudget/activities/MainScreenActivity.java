@@ -56,7 +56,7 @@ public class MainScreenActivity extends ActionBarActivity
     private static final String PREF_USERNAME = "username";
     private static final String PREF_PASSWORD = "password";
 
-    private AccountBalanceEqSoapHandler handler = new AccountBalanceEqSoapHandler("0000450044003");
+    private static AccountBalanceEqSoapHandler handler = new AccountBalanceEqSoapHandler("0000450044003");
 
 
 
@@ -222,7 +222,7 @@ public class MainScreenActivity extends ActionBarActivity
 
     }
 
-    public AccountBalanceEqSoapHandler getHandler() {
+    public static AccountBalanceEqSoapHandler getHandler() {
         return handler;
     }
 
@@ -232,7 +232,7 @@ public class MainScreenActivity extends ActionBarActivity
             //Log.i(TAG, "doInBackground");
             //getFahrenheit(celcius);
             //getAcctDetails(celcius);
-            AccountBalanceEqSoapHandler handler = new AccountBalanceEqSoapHandler("0000450044003");
+            handler = new AccountBalanceEqSoapHandler("0000450044003");
             handler.getAcctDetails();
 //            accBasicDetMap = handler.getAcctBasicDetailMap();
 //            accBalanceDetMap = handler.getAcctBalanceDetailMap();

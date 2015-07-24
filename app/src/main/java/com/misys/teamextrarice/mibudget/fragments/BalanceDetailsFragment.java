@@ -8,7 +8,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import android.widget.TextView;
 import com.misys.teamextrarice.mibudget.R;
+import com.misys.teamextrarice.mibudget.activities.MainScreenActivity;
+import com.misys.teamextrarice.mibudget.soaphandler.AccountBalanceEqSoapHandler;
 
 import java.util.HashMap;
 
@@ -70,6 +73,16 @@ public class BalanceDetailsFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+            AccountBalanceEqSoapHandler handler = MainScreenActivity.getHandler();
+            accBasicDetMap = handler.getAcctBasicDetailMap();
+            accBalanceDetMap = handler.getAcctBalanceDetailMap();
+            String acctref = accBasicDetMap.get("acctref");
+            String custName = accBasicDetMap.get("custname");
+            String ledgerbalance = accBalanceDetMap.get("ledgerbalance");
+            String availbalance = accBalanceDetMap.get("availbalance");
+            TextView accbal = (TextView) getActivity().findViewById(R.id.acctbalance);
+            accbal.setText("acctref: " + acctref + "\n" + "custname: " + custName + "\n" + "ledgerbalance: " + ledgerbalance
+            + "\n" + "avail balance: " + availbalance);
     }
 
     @Override
