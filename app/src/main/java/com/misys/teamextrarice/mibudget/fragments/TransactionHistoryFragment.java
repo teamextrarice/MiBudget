@@ -80,9 +80,10 @@ public class TransactionHistoryFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_transaction_history, container, false);
 
-        String[] transactions = {"Deposit 1,200.", "Checked balance", "Transferred 1.00."};
+        String[] transactions = new String[] {"Deposit 1,200.", "Checked balance", "Transferred 1.00."};
 
-        ArrayAdapter<String> transAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, transactions);
+        ArrayAdapter<String> transAdapter = new ArrayAdapter<String>(view.getContext(), R.layout.fragment_transaction_history, transactions);
+
 
         ListView transList = (ListView) view.findViewById(R.id.transaction_list);
         transList.setAdapter(transAdapter);
