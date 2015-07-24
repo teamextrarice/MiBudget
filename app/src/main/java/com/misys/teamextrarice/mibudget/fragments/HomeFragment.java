@@ -165,7 +165,7 @@ public class HomeFragment extends Fragment {
 
 
         PieChart chart = (PieChart) view.findViewById(R.id.chart);
-
+        chart.setDescription("Chart");
 
 
 
