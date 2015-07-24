@@ -1,5 +1,6 @@
 package com.misys.teamextrarice.mibudget.activities;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -56,6 +57,10 @@ public class AddIncomeExpenseActivity extends ActionBarActivity {
                             amountInput.getText().toString(), commentInput.getText().toString()))
                             , Toast.LENGTH_SHORT).show();
                 }
+                Intent mainIntent = new Intent(getApplicationContext(),MainScreenActivity.class);
+                mainIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(mainIntent);
             };
         });
     }

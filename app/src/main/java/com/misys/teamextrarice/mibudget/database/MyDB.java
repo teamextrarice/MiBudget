@@ -4,6 +4,13 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
+import android.widget.Toast;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 /**
  * Created by edgresma on 7/21/2015.
@@ -233,14 +240,57 @@ public class MyDB{
         }
         return mCursor; // iterate to get each value.
     }
+
     public Cursor selectCurrMonthBudget(String cutOffDay) {
+
+        DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        Date today = new Date();
+        Date todayWithZeroTime = null;
+        Calendar todayCalendar = Calendar.getInstance();
+        Calendar initialCutoffCal = Calendar.getInstance();
+        Calendar cutoffCalStart = Calendar.getInstance();
+        Calendar cutoffCalEnd = Calendar.getInstance();
+
+        try {
+            todayWithZeroTime = formatter.parse(formatter.format(today));
+        } catch (Exception e) {
+            Log.w("",e.toString());
+        }
+
+        todayCalendar.setTime(todayWithZeroTime);
+
+        Calendar newDate = Calendar.getInstance();
+        newDate.set(todayCalendar.get(Calendar.YEAR), todayCalendar.get(Calendar.MONTH), Integer.parseInt(cutOffDay));
+
+        initialCutoffCal.setTime(todayWithZeroTime);
+        Calendar newDate2 = Calendar.getInstance();
+        if (newDate.compareTo(initialCutoffCal) < 0) {
+                cutoffCalStart = newDate;
+                Log.d("Before 1 ", newDate.getTime().toString());
+                newDate2.set(todayCalendar.get(Calendar.YEAR), todayCalendar.get(Calendar.MONTH), Integer.parseInt(cutOffDay));
+            Log.d("Before 2 ", newDate2.getTime().toString());
+                newDate2.add(Calendar.MONTH, 1);
+                Log.d("After " , newDate2.getTime().toString());
+                cutoffCalEnd = newDate2;
+        } else if (newDate.compareTo(initialCutoffCal) >= 0) {
+                newDate.add(Calendar.DAY_OF_MONTH, -1);
+                cutoffCalEnd = newDate;
+                newDate2.set(todayCalendar.get(Calendar.YEAR), todayCalendar.get(Calendar.MONTH), Integer.parseInt(cutOffDay));
+                newDate2.add(Calendar.MONTH, -1);
+                cutoffCalStart = newDate2;
+        }
+
+        String finalDate = formatter.format(cutoffCalStart.getTime());
+        String finalDate2 = formatter.format(cutoffCalEnd.getTime());
         String[] cols = new String[] {BGT_ID, BGT_PTY_ID, BGT_TYPE, BGT_DATE, BGT_AMOUNT, BGT_COMMENTS};
-        Cursor mCursor = database.query(true, BGT_TABLE,cols,BGT_DATE + " BETWEEN '"+ cutOffDay +"' AND '"+cutOffDay+ "'"
+        Cursor mCursor = database.query(true, BGT_TABLE,cols,BGT_DATE + " BETWEEN '"+ finalDate +"' AND '"
+                + finalDate2+ "'"
                 , null, null, null, null, null);
         if (mCursor != null) {
             mCursor.moveToFirst();
         }
         return mCursor; // iterate to get each value.
+
     }
 
     public Cursor selectBudgetEntriesFromRange(Integer cutoff) {

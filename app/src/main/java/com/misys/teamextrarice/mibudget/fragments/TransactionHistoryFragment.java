@@ -83,7 +83,7 @@ public class TransactionHistoryFragment extends Fragment {
         details.add("Sample");
         details.add("Sampleweeeee");
         RecyclerView rv = (RecyclerView) view.findViewById(R.id.rv);
-        RVAdapter adapter = new RVAdapter();
+        RVAdapter adapter = new RVAdapter(details);
         LinearLayoutManager layoutManager = new LinearLayoutManager(view.getContext());
         rv.setLayoutManager(layoutManager);
         rv.setAdapter(adapter);

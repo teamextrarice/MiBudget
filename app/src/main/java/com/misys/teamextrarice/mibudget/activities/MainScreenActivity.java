@@ -234,13 +234,24 @@ public class MainScreenActivity extends ActionBarActivity
             //Log.i(TAG, "doInBackground");
             //getFahrenheit(celcius);
             //getAcctDetails(celcius);
-            SharedPreferences pref = getSharedPreferences(PREFS_NAME,MODE_PRIVATE);
-            handler = new AccountBalanceEqSoapHandler(pref.getString(PREF_ACCTID,"0000450044003"));
+            SharedPreferences pref = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
+            String acctref = pref.getString(PREF_ACCTID,"0000450044003");
+            acctref = pad(acctref);
+            handler = new AccountBalanceEqSoapHandler(acctref);
             handler.getAcctDetails();
 //            accBasicDetMap = handler.getAcctBasicDetailMap();
 //            accBalanceDetMap = handler.getAcctBalanceDetailMap();
 
             return null;
+        }
+
+        private String pad(String acctref){
+            int len = acctref.length();
+            String zeroes = "0000000000000";
+
+            acctref = zeroes.substring(0,zeroes.length()-len) + acctref;
+            return acctref;
+
         }
 
         @Override

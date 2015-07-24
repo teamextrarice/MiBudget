@@ -1,5 +1,6 @@
 package com.misys.teamextrarice.mibudget.activities;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -43,10 +44,14 @@ public class AddDailyTransactionActivity extends ActionBarActivity {
         addButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Perform action on click
-                Toast.makeText(getApplicationContext(), Long.toString(db.addBudget(db.selectByName(username).getString(db.selectByName(username).getColumnIndex("_id")),
+                Toast.makeText(getApplicationContext(),"Record " + Long.toString(db.addBudget(db.selectByName(username).getString(db.selectByName(username).getColumnIndex("_id")),
                         type.getSelectedItem().toString(), dateInput.getText().toString(),
-                        amountInput.getText().toString(), commentInput.getText().toString()))
+                        amountInput.getText().toString(), commentInput.getText().toString())) + "Add Successful"
                         ,Toast.LENGTH_SHORT).show();
+                Intent mainIntent = new Intent(getApplicationContext(),MainScreenActivity.class);
+                mainIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(mainIntent);
             }
         });
 

@@ -28,6 +28,8 @@ public class BalanceDetailsFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    private TextView accbal;
+    private View myView;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -76,20 +78,24 @@ public class BalanceDetailsFragment extends Fragment {
             AccountBalanceEqSoapHandler handler = MainScreenActivity.getHandler();
             accBasicDetMap = handler.getAcctBasicDetailMap();
             accBalanceDetMap = handler.getAcctBalanceDetailMap();
-            String acctref = accBasicDetMap.get("acctref");
-            String custName = accBasicDetMap.get("custname");
-            String ledgerbalance = accBalanceDetMap.get("ledgerbalance");
-            String availbalance = accBalanceDetMap.get("availbalance");
-            TextView accbal = (TextView) getActivity().findViewById(R.id.acctbalance);
-            accbal.setText("acctref: " + acctref + "\n" + "custname: " + custName + "\n" + "ledgerbalance: " + ledgerbalance
-            + "\n" + "avail balance: " + availbalance);
+
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_balance_details, container, false);
+        myView = inflater.inflate(R.layout.fragment_balance_details, container, false);
+        String acctref = accBasicDetMap.get("acctref");
+        String custName = accBasicDetMap.get("custname");
+        String ledgerbalance = accBalanceDetMap.get("ledgerbalance");
+        String availbalance = accBalanceDetMap.get("availbalance");
+        accbal = (TextView) myView.findViewById(R.id.acctbalance);
+
+        accbal.setText("acctref: " + acctref + "\n" + "custname: " + custName + "\n" + "ledgerbalance: " + ledgerbalance
+                + "\n" + "avail balance: " + availbalance);
+        return myView;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
