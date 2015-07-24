@@ -55,8 +55,10 @@ public class MainScreenActivity extends ActionBarActivity
     public static final String PREFS_NAME = "LoginPrefFile";
     private static final String PREF_USERNAME = "username";
     private static final String PREF_PASSWORD = "password";
+    private static final String PREF_ACCTID = "acctid";
 
-    private static AccountBalanceEqSoapHandler handler = new AccountBalanceEqSoapHandler("0000450044003");
+
+    private static AccountBalanceEqSoapHandler handler;
 
 
 
@@ -232,7 +234,8 @@ public class MainScreenActivity extends ActionBarActivity
             //Log.i(TAG, "doInBackground");
             //getFahrenheit(celcius);
             //getAcctDetails(celcius);
-            handler = new AccountBalanceEqSoapHandler("0000450044003");
+            SharedPreferences pref = getSharedPreferences(PREFS_NAME,MODE_PRIVATE);
+            handler = new AccountBalanceEqSoapHandler(pref.getString(PREF_ACCTID,"0000450044003"));
             handler.getAcctDetails();
 //            accBasicDetMap = handler.getAcctBasicDetailMap();
 //            accBalanceDetMap = handler.getAcctBalanceDetailMap();
