@@ -9,6 +9,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 import com.misys.teamextrarice.mibudget.R;
 import com.misys.teamextrarice.mibudget.adapter.RVAdapter;
@@ -77,28 +79,22 @@ public class TransactionHistoryFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_transaction_history, container, false);
-        List<String> details = new ArrayList<String>();
 
-        details.add("Test");
-        details.add("Sample");
-        details.add("Sampleweeeee");
-        RecyclerView rv = (RecyclerView) view.findViewById(R.id.rv);
-        RVAdapter adapter = new RVAdapter(details);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(view.getContext());
-        rv.setLayoutManager(layoutManager);
-        rv.setAdapter(adapter);
+        String[] transactions = {"Deposit 1,200.", "Checked balance", "Transferred 1.00."};
 
+        ArrayAdapter<String> transAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, transactions);
 
-
+        ListView transList = (ListView) view.findViewById(R.id.transaction_list);
+        transList.setAdapter(transAdapter);
         return view;
-    }
+
 
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
             mListener.onFragmentInteraction(uri);
         }
-    }
+     }?
 
     @Override
     public void onAttach(Activity activity) {
@@ -111,7 +107,7 @@ public class TransactionHistoryFragment extends Fragment {
         }
     }
 
-    @Override
+    @
     public void onDetach() {
         super.onDetach();
         mListener = null;
