@@ -55,9 +55,10 @@ public class MainScreenActivity extends ActionBarActivity
     public static final String PREFS_NAME = "LoginPrefFile";
     private static final String PREF_USERNAME = "username";
     private static final String PREF_PASSWORD = "password";
-    private HashMap<String,String> accBasicDetMap;
-    private HashMap<String,String> accBalanceDetMap;
-    private boolean taskFinished;
+
+    private AccountBalanceEqSoapHandler handler = new AccountBalanceEqSoapHandler("0000450044003");
+
+
 
 
     /*
@@ -91,18 +92,6 @@ public class MainScreenActivity extends ActionBarActivity
         mNavigationDrawerFragment.setUp(
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
-
-
-
-
-
-
-        AsyncCallWS task = new AsyncCallWS();
-        //Call execute
-        task.execute();
-
-
-
 
     }
 
@@ -218,7 +207,11 @@ public class MainScreenActivity extends ActionBarActivity
                 upsavInt.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 getApplicationContext().startActivity(upsavInt);
                 return true;
-
+            case R.id.sync_balance:
+                Toast.makeText(MainScreenActivity.this, "Synchronizing Balance", Toast.LENGTH_SHORT).show();
+                AsyncCallWS task = new AsyncCallWS();
+                //Call execute
+                task.execute();
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -229,6 +222,10 @@ public class MainScreenActivity extends ActionBarActivity
 
     }
 
+    public AccountBalanceEqSoapHandler getHandler() {
+        return handler;
+    }
+
     private class AsyncCallWS extends AsyncTask<String, Void, Void> {
         @Override
         protected Void doInBackground(String... params) {
@@ -237,10 +234,8 @@ public class MainScreenActivity extends ActionBarActivity
             //getAcctDetails(celcius);
             AccountBalanceEqSoapHandler handler = new AccountBalanceEqSoapHandler("0000450044003");
             handler.getAcctDetails();
-            accBasicDetMap = handler.getAcctBasicDetailMap();
-            accBalanceDetMap = handler.getAcctBalanceDetailMap();
-
-
+//            accBasicDetMap = handler.getAcctBasicDetailMap();
+//            accBalanceDetMap = handler.getAcctBalanceDetailMap();
 
             return null;
         }
@@ -249,15 +244,15 @@ public class MainScreenActivity extends ActionBarActivity
         protected void onPostExecute(Void result) {
 //            Log.i(TAG, "onPostExecute");
 //            tv.setText(fahren + "� F");
+            Toast.makeText(MainScreenActivity.this, "Synchronize Balance Successful", Toast.LENGTH_SHORT).show();
 
-
-            String acctref = accBasicDetMap.get("acctref");
-            String custName = accBasicDetMap.get("custname");
-            String ledgerbalance = accBalanceDetMap.get("ledgerbalance");
-            String availbalance = accBalanceDetMap.get("availbalance");
-            TextView sample = (TextView) findViewById(R.id.sample_text);
-            sample.setText("acctref: " + acctref + "\n" + "custname: " + custName + "\n" + "ledgerbalance: " + ledgerbalance
-            + "\n" + "avail balance: " + availbalance);
+//            String acctref = accBasicDetMap.get("acctref");
+//            String custName = accBasicDetMap.get("custname");
+//            String ledgerbalance = accBalanceDetMap.get("ledgerbalance");
+//            String availbalance = accBalanceDetMap.get("availbalance");
+//            TextView sample = (TextView) findViewById(R.id.sample_text);
+//            sample.setText("acctref: " + acctref + "\n" + "custname: " + custName + "\n" + "ledgerbalance: " + ledgerbalance
+//            + "\n" + "avail balance: " + availbalance);
 
         }
 

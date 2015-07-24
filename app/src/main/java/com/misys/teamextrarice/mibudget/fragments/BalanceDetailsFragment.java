@@ -10,6 +10,8 @@ import android.view.ViewGroup;
 
 import com.misys.teamextrarice.mibudget.R;
 
+import java.util.HashMap;
+
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
@@ -27,6 +29,9 @@ public class BalanceDetailsFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    private HashMap<String,String> accBasicDetMap;
+    private HashMap<String,String> accBalanceDetMap;
 
     private OnFragmentInteractionListener mListener;
 

@@ -29,4 +29,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
+    <item android:id="@+id/sync_balance"
+        android:icon="@drawable/extrarice"
+        android:title="Sync Balance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
 </menu>
