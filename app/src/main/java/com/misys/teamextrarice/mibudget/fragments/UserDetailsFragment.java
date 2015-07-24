@@ -85,13 +85,23 @@ public class UserDetailsFragment extends Fragment {
         TextView userdet = (TextView)view.findViewById(R.id.userdet);
         String username = pref.getString(PREF_USERNAME,"");
         String acctid = pref.getString(PREF_ACCTID,"");
+        acctid = pad(acctid);
         String cutoffday = pref.getString(PREF_CUTOFF,"");
         String birthdate = pref.getString(PREF_BDAY,"");
         String job = pref.getString(PREF_JOB,"");
 
-        userdet.setText("username: " + username + "\n" + "acct id: " +acctid + "\n" + "cutoff day: " + cutoffday
+        userdet.setText("username: " + username + "\n" + "acct id: " + acctid + "\n" + "cutoff day: " + cutoffday
                 + "\n" + "birthdate: " + birthdate + "\n" + "job: " + job);
         return view;
+    }
+
+    private String pad(String acctref){
+        int len = acctref.length();
+        String zeroes = "0000000000000";
+
+        acctref = zeroes.substring(0,zeroes.length()-len) + acctref;
+        return acctref;
+
     }
 
     // TODO: Rename method, update argument and hook method into UI event

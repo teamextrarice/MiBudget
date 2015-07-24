@@ -32,8 +32,8 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.TextViewHolder>{
 
         TextViewHolder(View itemView) {
             super(itemView);
-            cv = (CardView) itemView.findViewById(R.id.transaction_card);
-            text= (TextView) itemView.findViewById(R.id.transaction_details);
+//            cv = (CardView) itemView.findViewById(R.id.transaction_card);
+//            text= (TextView) itemView.findViewById(R.id.transaction_details);
         }
     }
 
