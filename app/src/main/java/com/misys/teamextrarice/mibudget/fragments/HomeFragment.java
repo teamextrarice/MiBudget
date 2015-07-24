@@ -7,6 +7,7 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,7 +23,11 @@ import com.misys.teamextrarice.mibudget.R;
 import com.misys.teamextrarice.mibudget.database.MyDB;
 import com.misys.teamextrarice.mibudget.util.BudgetUtil;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -99,23 +104,27 @@ public class HomeFragment extends Fragment {
         SharedPreferences pref = this.getActivity().getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
         final String username = pref.getString(PREF_USERNAME, "");
         final String cutoff = pref.getString(PREF_CUTOFF, "");
+
         MyDB db = MyDB.getInstance();
         db.setdbHelper(this.getActivity().getBaseContext());
 
+        Cursor user = db.selectByName(username);
         BudgetUtil budgetUtil = new BudgetUtil(this.getActivity().getBaseContext());
 
         //Entry c1e1 = new Entry(40.000f, 0); // 0 == Budget
         budgetUtil.sumExpenses();
-        Entry c1e1 = new Entry( Integer.parseInt(budgetUtil.sumMonthIncome(cutoff).toString()) -
-                Integer.parseInt(budgetUtil.sumMonthExpense(cutoff).toString()), 0); // 0 == Budget
+        Entry c1e1 = new Entry( Integer.parseInt(budgetUtil.sumMonthIncome(cutoff, user.getString(0)).toString()) -
+                Integer.parseInt(budgetUtil.sumMonthExpense(cutoff, user.getString(0)).toString()) -
+                Integer.parseInt(budgetUtil.sumMonthDailyExp(cutoff, user.getString(0)).toString())
+                , 0); // 0 == Budget
         values1.add(c1e1);
         //Entry c1e2 = new Entry(50.000f, 1); // 1 == Expenses
-        Entry c1e2 = new Entry(Integer.parseInt(budgetUtil.sumMonthExpense(cutoff).toString()), 1); // 1 == Expenses
+        Entry c1e2 = new Entry(Integer.parseInt(budgetUtil.sumMonthExpense(cutoff, user.getString(0)).toString()), 1); // 1 == Expenses
         values1.add(c1e2);
         //Entry c1e3 = new Entry(20.000f, 2); // 2 == Other
         Cursor cursor = db.selectByName(username);
         //cursor.moveToFirst();
-        Entry c1e3 = new Entry(Integer.parseInt(budgetUtil.sumMonthDailyExp(cutoff).toString()), 1); // 2 == Other
+        Entry c1e3 = new Entry(Integer.parseInt(budgetUtil.sumMonthDailyExp(cutoff, user.getString(0)).toString()), 1); // 2 == Other
         values1.add(c1e3);
         // and so on ...
 
@@ -158,12 +167,58 @@ public class HomeFragment extends Fragment {
         PieChart chart = (PieChart) view.findViewById(R.id.chart);
 
 
+
+
+        DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        Date today = new Date();
+        Date todayWithZeroTime = null;
+        Calendar todayCalendar = Calendar.getInstance();
+        Calendar initialCutoffCal = Calendar.getInstance();
+        Calendar cutoffCalStart = Calendar.getInstance();
+        Calendar cutoffCalEnd = Calendar.getInstance();
+
+        try {
+            todayWithZeroTime = formatter.parse(formatter.format(today));
+        } catch (Exception e) {
+            Log.w("", e.toString());
+        }
+
+        todayCalendar.setTime(todayWithZeroTime);
+
+        Calendar newDate = Calendar.getInstance();
+        newDate.set(todayCalendar.get(Calendar.YEAR), todayCalendar.get(Calendar.MONTH), Integer.parseInt(cutoff));
+
+        initialCutoffCal.setTime(todayWithZeroTime);
+        Calendar newDate2 = Calendar.getInstance();
+        if (newDate.compareTo(initialCutoffCal) < 0) {
+            cutoffCalStart = newDate;
+            Log.d("Before 1 ", newDate.getTime().toString());
+            newDate2.set(todayCalendar.get(Calendar.YEAR), todayCalendar.get(Calendar.MONTH), Integer.parseInt(cutoff));
+            Log.d("Before 2 ", newDate2.getTime().toString());
+            newDate2.add(Calendar.MONTH, 1);
+            Log.d("After " , newDate2.getTime().toString());
+            cutoffCalEnd = newDate2;
+        } else if (newDate.compareTo(initialCutoffCal) >= 0) {
+            newDate.add(Calendar.DAY_OF_MONTH, -1);
+            cutoffCalEnd = newDate;
+            newDate2.set(todayCalendar.get(Calendar.YEAR), todayCalendar.get(Calendar.MONTH), Integer.parseInt(cutoff));
+            newDate2.add(Calendar.MONTH, -1);
+            cutoffCalStart = newDate2;
+        }
+
+        long difMillis = cutoffCalEnd.getTimeInMillis() - todayCalendar.getTimeInMillis();
+        long diffDays = difMillis / (24 * 60 * 60 * 1000);
+
+        long dayBalance = (Integer.parseInt(budgetUtil.sumMonthIncome(cutoff, user.getString(0)).toString()) -
+                Integer.parseInt(budgetUtil.sumMonthExpense(cutoff, user.getString(0)).toString()) -
+                Integer.parseInt(budgetUtil.sumMonthDailyExp(cutoff, user.getString(0)).toString())) / diffDays;
+
         chart.setData(data);
-        chart.setCenterText("DAN IS THE MAN."); //change to budget
+        chart.setCenterText("Today's Budget: \n" + dayBalance + "\nDays Left\n" + diffDays + "\n" + cutoff); //change to budget
         chart.invalidate();
 
         TextView savings = (TextView) view.findViewById(R.id.card_savings);
-        savings.setText("20000");
+        savings.setText(budgetUtil.sumUserSavings(user.getString(0)).toString());
 
         return view;
     }

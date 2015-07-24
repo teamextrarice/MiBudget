@@ -135,6 +135,16 @@ public class MyDB{
         return mCursor; // iterate to get each value.
     }
 
+    public Cursor selectUserSavings(String id) {
+        String[] cols = new String[] {SVG_ID, SVG_PTY_ID, SVG_DATE, SVG_AMOUNT, SVG_COMMENTS};
+        Cursor mCursor = database.query(false, SVG_TABLE,cols, SVG_ID + " = '" + id + "'"
+                , null, null, null, null, null);
+        if (mCursor != null) {
+            mCursor.moveToFirst();
+        }
+        return mCursor; // iterate to get each value.
+    }
+
     public final static String INCEXP_TABLE="IncExp"; // name of table
 
     public final static String INCEXP_ID="txn_INCEXP_id"; // id auto-incremented for INC.EXP
@@ -241,7 +251,7 @@ public class MyDB{
         return mCursor; // iterate to get each value.
     }
 
-    public Cursor selectCurrMonthBudget(String cutOffDay) {
+    public Cursor selectCurrMonthBudget(String cutOffDay, String id) {
 
         DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         Date today = new Date();
@@ -284,7 +294,7 @@ public class MyDB{
         String finalDate2 = formatter.format(cutoffCalEnd.getTime());
         String[] cols = new String[] {BGT_ID, BGT_PTY_ID, BGT_TYPE, BGT_DATE, BGT_AMOUNT, BGT_COMMENTS};
         Cursor mCursor = database.query(true, BGT_TABLE,cols,BGT_DATE + " BETWEEN '"+ finalDate +"' AND '"
-                + finalDate2+ "'"
+                + finalDate2+ "'" + " AND " + BGT_PTY_ID + " = '" + id + "'"
                 , null, null, null, null, null);
         if (mCursor != null) {
             mCursor.moveToFirst();
