@@ -118,11 +118,7 @@ public class MainScreenActivity extends ActionBarActivity
                     .replace(R.id.fragment_placeholder, BalanceDetailsFragment.newInstance())
                     .commit();
                 break;
-            case 3:  fragmentManager.beginTransaction()
-                    .replace(R.id.fragment_placeholder, TransactionHistoryFragment.newInstance())
-                    .commit();
-                break;
-            case 4:
+            case 3:
                 SharedPreferences pref = getSharedPreferences(PREFS_NAME,MODE_PRIVATE);
                 SharedPreferences.Editor editor = pref.edit();
                 editor.putString(PREF_USERNAME,null);
