@@ -28,6 +28,10 @@ public class LoginActivity extends ActionBarActivity {
     public static final String PREFS_NAME = "LoginPrefFile";
     private static final String PREF_USERNAME = "username";
     private static final String PREF_PASSWORD = "password";
+    private static final String PREF_ACCTID = "acctid";
+    private static final String PREF_CUTOFF = "cutoffday";
+    private static final String PREF_BDAY = "bday";
+    private static final String PREF_JOB = "job";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +59,10 @@ public class LoginActivity extends ActionBarActivity {
 
         String username ="";
         String password ="";
+        String acctId = "";
+        String cutoffday = "";
+        String bday = "";
+        String job = "";
 
         MyDB db = MyDB.getInstance();
         db.setdbHelper(this);
@@ -66,6 +74,7 @@ public class LoginActivity extends ActionBarActivity {
             while (!cur.isAfterLast()) {
                 username = cur.getString(cur.getColumnIndex(MyDB.PTY_NAME));
                 password = cur.getString(cur.getColumnIndex(MyDB.PTY_PWD));
+
                 cur.moveToNext();
             }
             if(userInput.getText().toString().equals(username) && passwordInput.getText().toString().equals(password)){
@@ -77,6 +86,10 @@ public class LoginActivity extends ActionBarActivity {
                 SharedPreferences.Editor editor = pref.edit();
                 editor.putString(PREF_USERNAME,username);
                 editor.putString(PREF_PASSWORD,password);
+                editor.putString(PREF_ACCTID,acctId);
+                editor.putString(PREF_CUTOFF,cutoffday);
+                editor.putString(PREF_BDAY,bday);
+                editor.putString(PREF_JOB,job);
                 editor.commit();
 
                 getApplicationContext().startActivity(mainIntent);
