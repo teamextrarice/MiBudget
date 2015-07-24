@@ -77,17 +77,6 @@ public class TransactionHistoryFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_transaction_history, container, false);
-        List<String> details = new ArrayList<String>();
-
-        details.add("Test");
-        details.add("Sample");
-        details.add("Sampleweeeee");
-        RecyclerView rv = (RecyclerView) view.findViewById(R.id.rv);
-        RVAdapter adapter = new RVAdapter();
-        LinearLayoutManager layoutManager = new LinearLayoutManager(view.getContext());
-        rv.setLayoutManager(layoutManager);
-        rv.setAdapter(adapter);
-
 
 
         return view;
@@ -98,7 +87,7 @@ public class TransactionHistoryFragment extends Fragment {
         if (mListener != null) {
             mListener.onFragmentInteraction(uri);
         }
-    }
+     }?
 
     @Override
     public void onAttach(Activity activity) {
