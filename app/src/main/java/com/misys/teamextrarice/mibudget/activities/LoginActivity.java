@@ -59,6 +59,7 @@ public class LoginActivity extends ActionBarActivity {
         MyDB db = MyDB.getInstance();
         db.setdbHelper(this);
         //validate user
+
         Cursor cur = db.selectByName(userInput.getText().toString());
 
         if(cur != null) {

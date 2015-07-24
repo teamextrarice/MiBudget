@@ -1,6 +1,8 @@
 package com.misys.teamextrarice.mibudget.fragments;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -15,6 +17,7 @@ import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.utils.ColorTemplate;
 import com.misys.teamextrarice.mibudget.R;
+import com.misys.teamextrarice.mibudget.util.BudgetUtil;
 
 import java.util.ArrayList;
 
@@ -29,6 +32,11 @@ import java.util.ArrayList;
 public class HomeFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+
+    public static final String PREFS_NAME = "LoginPrefFile";
+    private static final String PREF_USERNAME = "username";
+    private static final String PREF_PASSWORD = "password";
+
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
@@ -81,11 +89,21 @@ public class HomeFragment extends Fragment {
         ArrayList<Entry> values1 = new ArrayList<Entry>();
 
 
-        Entry c1e1 = new Entry(40.000f, 0); // 0 == Budget
+        SharedPreferences pref = this.getActivity().getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+        final String username = pref.getString(PREF_USERNAME, "");
+
+        BudgetUtil budgetUtil = new BudgetUtil(this.getActivity().getBaseContext());
+
+        //Entry c1e1 = new Entry(40.000f, 0); // 0 == Budget
+        budgetUtil.sumExpenses();
+        Entry c1e1 = new Entry( Integer.parseInt(budgetUtil.sumIncome().toString()) -
+                Integer.parseInt(budgetUtil.sumExpenses().toString()), 0); // 0 == Budget
         values1.add(c1e1);
-        Entry c1e2 = new Entry(50.000f, 1); // 1 == Expenses
+        //Entry c1e2 = new Entry(50.000f, 1); // 1 == Expenses
+        Entry c1e2 = new Entry(Integer.parseInt(budgetUtil.sumExpenses().toString()), 1); // 1 == Expenses
         values1.add(c1e2);
-        Entry c1e3 = new Entry(20.000f, 2); // 2 == Other
+        //Entry c1e3 = new Entry(20.000f, 2); // 2 == Other
+        Entry c1e3 = new Entry(Integer.parseInt(budgetUtil.sumMonthDailyExp().toString()), 2); // 2 == Other
         values1.add(c1e3);
         // and so on ...
 
