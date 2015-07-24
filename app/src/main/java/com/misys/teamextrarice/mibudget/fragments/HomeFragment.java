@@ -128,7 +128,7 @@ public class HomeFragment extends Fragment {
         values1.add(c1e3);
         // and so on ...
 
-        PieDataSet setComp1 = new PieDataSet(values1, "Money Floyd");
+        PieDataSet setComp1 = new PieDataSet(values1, "|Legend|");
         setComp1.setAxisDependency(YAxis.AxisDependency.LEFT);
 
         ArrayList<PieDataSet> dataSets = new ArrayList<PieDataSet>();
@@ -214,7 +214,7 @@ public class HomeFragment extends Fragment {
                 Integer.parseInt(budgetUtil.sumMonthDailyExp(cutoff, user.getString(0)).toString())) / diffDays;
 
         chart.setData(data);
-        chart.setCenterText("Today's Budget: \n" + dayBalance + "\nDays Left\n" + diffDays + "\n" + cutoff); //change to budget
+        chart.setCenterText("Today's Budget: \n" + dayBalance + "\nDays Left\n" + diffDays); //change to budget
         chart.invalidate();
 
         TextView savings = (TextView) view.findViewById(R.id.card_savings);

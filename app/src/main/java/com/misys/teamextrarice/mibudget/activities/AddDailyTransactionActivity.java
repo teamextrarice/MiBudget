@@ -38,7 +38,7 @@ public class AddDailyTransactionActivity extends ActionBarActivity {
         final EditText dateInput = (EditText) findViewById(R.id.date_input);
         final Spinner type = (Spinner) findViewById(R.id.spinner1);
         Button addButton = (Button) findViewById(R.id.add_button);
-        Button cancelButton = (Button) findViewById(R.id.cancel_button);
+       // Button cancelButton = (Button) findViewById(R.id.cancel_button);
 
 
         addButton.setOnClickListener(new View.OnClickListener() {
