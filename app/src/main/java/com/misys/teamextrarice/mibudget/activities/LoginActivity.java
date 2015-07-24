@@ -74,7 +74,10 @@ public class LoginActivity extends ActionBarActivity {
             while (!cur.isAfterLast()) {
                 username = cur.getString(cur.getColumnIndex(MyDB.PTY_NAME));
                 password = cur.getString(cur.getColumnIndex(MyDB.PTY_PWD));
-
+                acctId = cur.getString(cur.getColumnIndex(MyDB.PTY_ACCTID));
+                cutoffday = cur.getString(cur.getColumnIndex(MyDB.PTY_CutoffDate));
+                bday = cur.getString(cur.getColumnIndex(MyDB.PTY_BirthDate));
+                job = cur.getString(cur.getColumnIndex(MyDB.PTY_Occupation));
                 cur.moveToNext();
             }
             if(userInput.getText().toString().equals(username) && passwordInput.getText().toString().equals(password)){

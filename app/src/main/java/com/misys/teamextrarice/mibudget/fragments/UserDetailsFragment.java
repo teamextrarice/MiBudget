@@ -82,7 +82,7 @@ public class UserDetailsFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_user_details, container, false);
         SharedPreferences pref = getActivity().getSharedPreferences(PREFS_NAME, getActivity().MODE_PRIVATE);
-        TextView userdet = view.findViewById(R.id.userdet);
+        TextView userdet = (TextView)view.findViewById(R.id.userdet);
         String username = pref.getString(PREF_USERNAME,"");
         String acctid = pref.getString(PREF_ACCTID,"");
         String cutoffday = pref.getString(PREF_CUTOFF,"");
