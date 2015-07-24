@@ -40,9 +40,27 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:entries="@array/daily_arrays"
-            android:prompt="@string/type_prompt" />
+            android:prompt="@string/type_prompt"
+            android:spinnerMode="dropdown" />
     </LinearLayout>
-
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="center_horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/date_label"
+            android:text="Date:"
+            android:layout_gravity="center_horizontal" />
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="Input Date"
+            android:id="@+id/date_input"
+            android:layout_gravity="center_horizontal" />
+    </LinearLayout>
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -80,7 +98,8 @@
             android:layout_height="wrap_content"
             android:text="Cancel"
             android:paddingLeft="5dp"
-            android:onClick="cancel"/>
+            android:onClick="cancel"
+            android:id="@+id/cancel_button" />
 
     </LinearLayout>
 </LinearLayout>

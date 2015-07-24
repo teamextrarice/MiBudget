@@ -42,7 +42,25 @@
             android:entries="@array/budget_arrays"
             android:prompt="@string/type2_prompt" />
     </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="center_horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/effectiveDay"
+            android:text="Comment:"
+            android:layout_gravity="center_horizontal" />
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="Input Effective Day"
+            android:id="@+id/effectiveDay_inpu"
+            android:layout_gravity="center_horizontal" />
 
+    </LinearLayout>
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

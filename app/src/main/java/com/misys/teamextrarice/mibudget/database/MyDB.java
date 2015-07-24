@@ -233,4 +233,13 @@ public class MyDB{
         }
         return mCursor; // iterate to get each value.
     }
+    public Cursor selectBudgetEntriesFromRange(Integer cutoff) {
+        String[] cols = new String[] {BGT_ID, BGT_PTY_ID, BGT_TYPE, BGT_DATE, BGT_AMOUNT, BGT_COMMENTS};
+        Cursor mCursor = database.query(true, BGT_TABLE,cols,null
+                , null, null, null, null, null);
+        if (mCursor != null) {
+            mCursor.moveToFirst();
+        }
+        return mCursor; // iterate to get each value.
+    }
 }
