@@ -108,8 +108,20 @@ public class HomeFragment extends Fragment {
         values1.add(c1e2);
         //Entry c1e3 = new Entry(20.000f, 2); // 2 == Other
         Cursor cursor = db.selectByName(username);
-        cursor.moveToFirst();
-        Entry c1e3 = new Entry(Integer.parseInt(cursor.getString(cursor.getColumnIndex("cutoffDay"))), 2); // 2 == Other
+        //cursor.moveToFirst();
+        String cutoff ="";
+        int cutoffNum = 0;
+        if(cursor != null) {
+            while (!cursor.isAfterLast()) {
+                cutoff = cursor.getString(cursor.getColumnIndex("cutoffDay"));
+                cursor.moveToNext();
+            }
+        }
+        if(!"".equals(cutoff)){
+            cutoffNum = Integer.parseInt(cutoff);
+        }
+
+        Entry c1e3 = new Entry(cutoffNum, 2); // 2 == Other
         values1.add(c1e3);
         // and so on ...
 
