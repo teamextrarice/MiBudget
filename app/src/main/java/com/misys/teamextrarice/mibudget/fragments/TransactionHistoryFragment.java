@@ -95,7 +95,7 @@ public class TransactionHistoryFragment extends Fragment {
         if (mListener != null) {
             mListener.onFragmentInteraction(uri);
         }
-     }?
+     }
 
     @Override
     public void onAttach(Activity activity) {
