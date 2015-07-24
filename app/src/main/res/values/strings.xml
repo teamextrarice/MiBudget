@@ -4,8 +4,7 @@
     <string name="title_section1">Home</string>
     <string name="title_section2">User Details</string>
     <string name="title_section3">Balance Details</string>
-    <string name="title_section4">Transaction History</string>
-    <string name="title_section5">Logout</string>
+    <string name="title_section4">Logout</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
