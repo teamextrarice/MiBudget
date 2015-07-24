@@ -38,7 +38,7 @@
                             android:layout_height="wrap_content" android:layout_width="wrap_content"
                             android:clickable="false"
                             android:textStyle="bold"
-                            android:textSize="@dimen/abc_text_size_title_material"/>
+                            android:textSize="33sp"/>
                         <TextView
                             android:id="@+id/card_savings"
                             android:layout_width="wrap_content"
@@ -46,7 +46,7 @@
                             android:layout_below="@+id/card_text"
                             android:text="123400"
                             android:textColor="#ff00a60f"
-                            android:textSize="@dimen/abc_text_size_title_material" />
+                            android:textSize="28sp" />
 
                     </RelativeLayout>
                 </android.support.v7.widget.CardView>
